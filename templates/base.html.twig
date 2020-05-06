@@ -14,16 +14,37 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-right : 10px; background-color : rgba(3, 140, 76, 0.8);
+                     border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
+                        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
+
                         <a class="nav-link" href="{{ path('blog') }}">Articles <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-left : 5px; margin-right: 10px ;background-color : rgba(3, 140, 76, 0.8);
+                     border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
+                     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px;">
+
                         <a class="nav-link" href="{{ path('blog_create') }}">Créer un article</a>
                     </li>
+                    {% if not app.user %}
+                    <li class="nav-item" style="margin-left: 5px; margin-right: 10px; background-color : rgba(235, 131, 52, 0.9);
+                     border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%; margin-bottom: 5px">
+
+                    <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item" style="margin-left: 5px; margin-right: 10px;background-color : rgba(3, 140, 76, 0.8);
+                     border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
+                     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
+
+                        <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+                    </li>
+                    {% endif %}
+
                 </ul>
             </div>
         </nav>
-        <div class="container">
+        <div class="container" style="margin-top: 10px">
             {% block body %}{% endblock %}
         </div>
 

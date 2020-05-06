@@ -16,11 +16,11 @@
         <div>
             {{ article.content | raw }}
         </div>
-
-
+    <hr>
     </article>
 
     <section id="comments">
+        <h3> <i>{{ article.comments |length }} commentaires : </i> </h3><br>
         {% for comment in article.comments %}
             <div class="comment">
                 <div class="row">
@@ -34,8 +34,21 @@
             </div>
             <hr>
         {% endfor %}
+
+        {% if app.user %}
+            {{ form_start(commentForm) }}
+                {{ form_row(commentForm.author, {'attr':{'placeholder':'Votre nom'}})}}
+                {{ form_row(commentForm.content, {'attr':{'placeholder':'Votre commentaire'}}) }}
+                <button style="margin-bottom: 20px" type="submit" class="btn btn-success">Commenter</button>
+            {{ form_end(commentForm) }}
+        {% else %}
+            <div style="background:rgba(0,0,0,0.150) ; display: flex; align-items: center; flex-direction: column;
+                        padding: 10px 0 10px 0px ;border-style: groove; border-radius: 2%; border-width: 5px;
+                        margin : 10px 10px 50px 10px;">
+                <h2>Connectez-vous pour commenter </h2>
+                <a class="btn btn-primary" href="{{ path('security_login') }}">Connexion</a>
+            </div>
+
+        {% endif %}
     </section>
-
-
-
 {% endblock %}

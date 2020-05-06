@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
+use Cassandra\Date;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +55,7 @@ class BlogController extends AbstractController
 
         return $this->render('blog/create.html.twig', [
             'editMode' => $article->getId() != null,
-            'formArticle' => $form->createView()
+            'formArticle' => $form->createView(),
         ]);
 
     }
@@ -73,12 +76,27 @@ class BlogController extends AbstractController
      * @param $id
      * @return Response
      * @Route("/blog/{id}", name="blog_show")
+     * @throws Exception
      */
-    public function show(ArticleRepository $repo, $id){
-
+    public function show(ArticleRepository $repo, $id, Request $request, ManagerRegistry $manager){
+        $comment = new Comment();
         $article = $repo->find($id);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $comment->setCreatedAt(new \DateTime());
+            $comment->setArticle($article);
+            $manager->getManager()->persist($comment);
+            $manager->getManager()->flush();
+
+            return $this->redirectToRoute('blog_show', ['id' => $article->getId()]);
+        }
+
+
         return $this->render('blog/show.html.twig',[
             'article' => $article,
+            'commentForm' => $form->createView()
 
         ]);
     }
