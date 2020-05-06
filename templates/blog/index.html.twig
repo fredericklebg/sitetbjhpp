@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+
+    <section class="articles">
+        {% for article in articles %}
+            <article style="margin-bottom: 30px">
+                <h2 style="font-size: 40px">{{ article.title }} </h2>
+                <img src="https://placehold.it/350x150" alt="image de l\'article">
+                <div>
+                    <p>{{ article.content | raw }}</p>
+                    <a href="{{ path('blog_show', {'id':article.id}) }}" class="btn btn-primary">Lire la suite</a>
+                </div>
+        </article>
+        {% endfor %}
+
+
+
+    </section>
+
+
+{% endblock %}
