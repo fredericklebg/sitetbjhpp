@@ -5,8 +5,20 @@
         <title>{% block title %}Titre{% endblock %}</title>
         <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
         {% block stylesheets %}{% endblock %}
+        <style>
+            .container{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                /*border-style: solid;
+                border-width: 0px;
+                padding: 10px 500px 0px 20px;*/
+
+            }
+        </style>
     </head>
     <body>
+
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <a class="navbar-brand" href="/">Packopening</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,33 +30,39 @@
                      border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
                         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
 
-                        <a class="nav-link" href="{{ path('blog') }}">Articles <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path('encheres') }}">Enchères en cours <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item" style="margin-left : 5px; margin-right: 10px ;background-color : rgba(3, 140, 76, 0.8);
                      border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
                      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px;">
 
-                        <a class="nav-link" href="{{ path('blog_create') }}">Créer un article</a>
+                        <a class="nav-link" href="{{ path('enchere_create') }}">Créer une enchère</a>
                     </li>
                     {% if not app.user %}
-                    <li class="nav-item" style="margin-left: 5px; margin-right: 10px; background-color : rgba(235, 131, 52, 0.9);
-                     border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%; margin-bottom: 5px">
+                        <li class="nav-item" style="margin-left: 5px; margin-right: 10px;background-color : rgba(3, 140, 76, 0.8);
+                            border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
+                            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
+                        <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                        </li>
 
-                    <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
-                    </li>
+                        <li class="nav-item" style="margin-left: 5px; margin-right: 10px;background-color : rgba(3, 140, 76, 0.8);
+                        border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
+                        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
+                        <a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
+                        </li>
+
                     {% else %}
-                    <li class="nav-item" style="margin-left: 5px; margin-right: 10px;background-color : rgba(3, 140, 76, 0.8);
-                     border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
-                     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
-
-                        <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
-                    </li>
+                        <li class="nav-item" style="margin-left: 5px; margin-right: 10px;background-color : rgba(3, 140, 76, 0.8);
+                         border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
+                         box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
+                            <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
+                        </li>
                     {% endif %}
 
                 </ul>
             </div>
         </nav>
-        <div class="container" style="margin-top: 10px">
+        <div class="container">
             {% block body %}{% endblock %}
         </div>
 

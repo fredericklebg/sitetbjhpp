@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% block title %} {% if editMode %}Modification d'enchere{% else %}Création d'enchere{% endif %}{% endblock %}
+{% block body %}
+    {% if app.user %}
+        {% if editMode %}
+            <h1>Modification d'enchere</h1>
+        {% else %}
+            <h1>Création d'enchere</h1>
+        {% endif %}
+
+        {{ form_start(formEnchere) }}
+            <div class="produit">
+                {{ form_row(formEnchere.produit.reference, {'label': 'Reference'}, {'attr': {'placeholder':"Référence du produit"} } ) }}
+                {{ form_row(formEnchere.produit.descriptif, {'label': 'Descriptif'}, {'attr': {'placeholder':"Référence du produit"} } ) }}
+                {{ form_row(formEnchere.produit.prix, {'label': 'Prix'}, {'attr': {'placeholder':"Référence du produit"} } ) }}
+                {{ form_row(formEnchere.produit.image, {'label': 'Image'}, {'attr': {'placeholder':"Référence du produit"} } ) }}
+            </div>
+    {% else %}
+            <h1>Connectez-vous pour créer une enchère</h1>
+    {% endif %}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer
+        {% else %}
+            Mettre l'enchère en ligne
+        {% endif %}
+    </button>
+
+    {{ form_end(formEnchere) }}
+
+
+
+{% endblock %}

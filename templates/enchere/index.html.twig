@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Encheres{% endblock %}
+
+{% block body %}
+    <style>
+        #produitEnchere{
+            color:powderblue;
+            font-size: 25px;
+        }
+    </style>
+
+    <section class="encheres">
+        {% for enchere in encheres %}
+            <article style="margin-bottom: 30px">
+
+                <h3 id="produitEnchere">{{ enchere.produit.descriptif   }} <br> RefProduit : {{ enchere.produit.reference }}</h3>
+                <img src="{{enchere.produit.image}}" alt="image du produit">
+                <div style="margin-top: 10px">
+                    <a href="{{ path('enchere_show', {'id':enchere.id}) }}" class="btn btn-primary">Voir l'enchère</a>
+                </div>
+            </article>
+        {% endfor %}
+
+
+
+    </section>
+
+
+{% endblock %}

@@ -22,7 +22,7 @@ security:
 
             logout:
                 path: security_logout
-                target: blog
+                target: encheres
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
