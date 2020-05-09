@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        #formPack{
+            margin-top: 30px;
+        }
+    </style>
+
+    <div id="formPack">
+
+        {{ form_start(formPackJetons) }}
+        {{ form_row(formPackJetons.nbJetons) }}
+        {{ form_row(formPackJetons.description) }}
+        {{ form_row(formPackJetons.prix) }}
+        <button type="submit" class="btn btn-success">
+            {% if editMode %}
+                Enregistrer
+            {% else %}
+                Créer le pack de jetons
+            {% endif %}
+        </button>
+
+        {{ form_end(formPackJetons) }}
+
+
+    </div>
+
+{% endblock %}

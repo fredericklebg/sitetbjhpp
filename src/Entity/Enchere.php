@@ -54,6 +54,15 @@ class Enchere
      */
     private $produit;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HistoriqueEncheres", mappedBy="enchere")
+     */
+    private $historiqueEncheres;
+
+    public function __construct()
+    {
+        $this->historiqueEncheres = new ArrayCollection();
+    }
 
     public function getDateDebut(): ?\DateTimeInterface
     {
@@ -91,6 +100,36 @@ class Enchere
         return $this;
     }
 
+    /**
+     * @return Collection|HistoriqueEncheres[]
+     */
+    public function getHistoriqueEncheres(): Collection
+    {
+        return $this->historiqueEncheres;
+    }
+
+    public function addHistoriqueEnchere(HistoriqueEncheres $historiqueEnchere): self
+    {
+        if (!$this->historiqueEncheres->contains($historiqueEnchere)) {
+            $this->historiqueEncheres[] = $historiqueEnchere;
+            $historiqueEnchere->setEnchere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriqueEnchere(HistoriqueEncheres $historiqueEnchere): self
+    {
+        if ($this->historiqueEncheres->contains($historiqueEnchere)) {
+            $this->historiqueEncheres->removeElement($historiqueEnchere);
+            // set the owning side to null (unless already changed)
+            if ($historiqueEnchere->getEnchere() === $this) {
+                $historiqueEnchere->setEnchere(null);
+            }
+        }
+
+        return $this;
+    }
 }
 
 

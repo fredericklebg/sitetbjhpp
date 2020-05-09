@@ -9,7 +9,8 @@
             .container{
                 display: flex;
                 justify-content: center;
-                align-items: center;
+                position: relative;
+                left: -250px;
                 /*border-style: solid;
                 border-width: 0px;
                 padding: 10px 500px 0px 20px;*/
@@ -20,7 +21,7 @@
     <body>
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="/">Packopening</a>
+            <a class="navbar-brand" href="/">Enchère-poi Symfony</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -53,6 +54,12 @@
 
                     {% else %}
                         <li class="nav-item" style="margin-left: 5px; margin-right: 10px;background-color : rgba(3, 140, 76, 0.8);
+                        border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
+                        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
+                            <a class="nav-link" href="{{ path('achat_pack_jetons') }}">Acheter Jetons</a>
+                        </li>
+
+                        <li class="nav-item" style="margin-left: 5px; margin-right: 10px;background-color : rgba(3, 140, 76, 0.8);
                          border-top-left-radius: 5%; border-bottom-left-radius: 5%;  border-top-right-radius: 5%;
                          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.4); margin-bottom: 5px">
                             <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
@@ -62,6 +69,13 @@
                 </ul>
             </div>
         </nav>
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <div class="container">
             {% block body %}{% endblock %}
         </div>

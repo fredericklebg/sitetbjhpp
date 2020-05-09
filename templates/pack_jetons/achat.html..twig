@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acheter Jetons{% endblock %}
+
+{% block body %}
+    <style>
+        .packs{
+            display: flex;
+            border-style: solid;
+            border-width: 2px;
+            border-color: black;
+            margin-top: 10px;
+            box-shadow: 10px 5px 5px black;
+            padding: 10px 40px 10px 60px;
+            align-items: center;
+            flex-direction: column;
+
+        }
+    </style>
+
+    <div>
+    <h1 style="margin:0 50px 50px 50px"  >Acheter des jetons <br></h1>
+    </div>
+
+    {% for packJetons in packsJetons %}
+        <div class="packs">
+
+            <h3 id="nbjetons">Nombre de jetons : {{ packJetons.nbJetons  }} </h3>
+            <p> {{ packJetons.description }}</p>
+            <h3>Prix : {{ packJetons.prix }}€</h3>
+            <a href="{{ path('encheres') }}" class="btn btn-primary">ACHETER</a>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

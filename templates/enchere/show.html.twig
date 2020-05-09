@@ -3,19 +3,32 @@
 {% block body %}
 
     <section style="margin-bottom: 30px">
-        <h2 style="font-size: 40px">Enchère n°{{enchere.id}}</h2>
+        <h2 style="font-size: 40px">{{ enchere.produit.descriptif }}</h2>
         <div style="font-family: 'Calisto MT', 'Arial'">
-            </br>
             <hr>
             <!-- SI LENCHERE EST FINIT FAIRE AUTRE CHOSE  -->
             Enchère en cours, commencée le  {{ enchere.dateDebut | date("d/m/Y")}}
             à {{ enchere.dateDebut | date("H:i") }}, se termine le {{ enchere.dateFin | date("d/m/Y")}}
             à {{ enchere.dateFin | date("H:i")}} <br>
             Prix du produit : {{ enchere.produit.prix }}€
+            <br>
+            <img src="{{ enchere.produit.image }}" alt="image de l'article">
         </div>
-        <img src="{{ enchere.produit.image }}" alt="image de l'article">
+        {% if not app.user %}
+            <a style="position: relative; left: 200px; top: 0px" href="{{ path('security_login') }}"
+               class="btn btn-primary">Connectez-vous pour enchérir</a>
 
-    <hr>
+        {% else %}
+
+        <div>
+            <h2 style="margin-top: 40px">Faire une offre</h2>
+        </div>
+        {{ form_start(formOffre) }}
+            {{ form_row(formOffre.prix, { 'attr' :{'placeholder': 'Montant de votre enchère...'}}) }}
+            <button style="position: relative; left: 500px" type="submit" class="btn btn-success">Enchérir</button>
+        {{ form_end(formOffre) }}
+
+        {% endif %}
     </section>
 
 {% endblock %}

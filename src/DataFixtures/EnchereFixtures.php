@@ -18,20 +18,19 @@ class EnchereFixtures extends Fixture
         for($i = 0 ; $i < 10 ; $i++){
             $produit = new Produit();
             $produit->setReference(strval($faker->randomNumber(8)))
-                    ->setDescriptif($faker->title())
+                    ->setDescriptif($faker->word)
                     ->setPrix($faker->numberBetween(2.5,200))
-                    ->setImage($faker->imageUrl(150, 150));
+                    ->setImage("https://placehold.it/150x150");
 
             $manager->persist($produit);
 
-            for($j = 1; $j <= mt_rand(3, 6); $j++){
-                $enchere = new Enchere();
-                $enchere->setProduit($produit)
-                    ->setDateDebut(new \DateTime())
-                    ->setDateFin($faker->dateTimeBetween('now', '2 days'));
+            $enchere = new Enchere();
+            $enchere->setProduit($produit)
+                ->setDateDebut(new \DateTime())
+                ->setDateFin($faker->dateTimeBetween('now', '4 days'));
 
-                $manager->persist($enchere);
-            }
+            $manager->persist($enchere);
+
         }
 
         $manager->flush();

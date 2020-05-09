@@ -3,9 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Enchere;
+use App\Entity\HistoriqueEncheres;
 use App\Entity\Produit;
+use App\Entity\User;
 use App\Form\EnchereType;
+use App\Form\HistoriqueEncheresType;
 use App\Repository\EnchereRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EnchereController extends AbstractController
 {
+    //TODO     Je m'excuse par avance de ne pas avoir pu implémenter la fonctionnalité la plus importante du site
+
     /**
      * @Route("/encheres", name="encheres")
      */
@@ -77,11 +83,43 @@ class EnchereController extends AbstractController
     public function show(EnchereRepository $repo, $id, Request $request, ManagerRegistry $manager){
         $enchere = $repo->find($id);
 
-        return $this->render('enchere/show.html.twig',[
-            'enchere' => $enchere,
+        $offre = new HistoriqueEncheres();
 
-        ]);
+
+
+
+            $form = $this->createForm(HistoriqueEncheresType::class, $offre);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $offre->setDateEnchere(new \DateTime());
+                $offre->setEnchere($enchere);
+                $offre->setUser($this->getUser());
+
+                $this->addFlash('success','Enchère réussie');
+
+                $manager->getManager()->persist($offre);
+                $manager->getManager()->flush();
+
+                //return $this->redirectToRoute('enchere_success');
+            }
+
+            return $this->render('enchere/show.html.twig', [
+                'enchere' => $enchere,
+                'formOffre' => $form->createView()
+
+            ]);
+
     }
+
+    /**
+     * @Route("/encheres/success", name="enchere_success")
+     */
+    public function success(){
+
+        return $this->render('enchere/success.html.twig');
+    }
+
 
 
 }

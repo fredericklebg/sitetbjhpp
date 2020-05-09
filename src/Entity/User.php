@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -50,6 +52,16 @@ class User implements UserInterface
      */
     public $confirm_password;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HistoriqueEncheres", mappedBy="user")
+     */
+    private $historiqueEncheres;
+
+    public function __construct()
+    {
+        $this->historiqueEncheres = new ArrayCollection();
+        $this->achats = new ArrayCollection();
+    }
 
     public function getEmail(): ?string
     {
@@ -97,8 +109,80 @@ class User implements UserInterface
     // TODO: Implement getSalt() method.
     }
 
-    public function getRoles()
+    private $roles = [];
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Achat", mappedBy="user", orphanRemoval=true)
+     */
+    private $achats;
+
+    public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @return Collection|HistoriqueEncheres[]
+     */
+    public function getHistoriqueEncheres(): Collection
+    {
+        return $this->historiqueEncheres;
+    }
+
+    public function addHistoriqueEncheres(HistoriqueEncheres $historiqueEncheres): self
+    {
+        if (!$this->historiqueEncheres->contains($historiqueEncheres)) {
+            $this->historiqueEncheres[] = $historiqueEncheres;
+            $historiqueEncheres->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriqueEncheres(HistoriqueEncheres $historiqueEncheres): self
+    {
+        if ($this->historiqueEncheres->contains($historiqueEncheres)) {
+            $this->historiqueEncheres->removeElement($historiqueEncheres);
+            // set the owning side to null (unless already changed)
+            if ($historiqueEncheres->getUser() === $this) {
+                $historiqueEncheres->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Achat[]
+     */
+    public function getAchats(): Collection
+    {
+        return $this->achats;
+    }
+
+    public function addAchat(Achat $achat): self
+    {
+        if (!$this->achats->contains($achat)) {
+            $this->achats[] = $achat;
+            $achat->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAchat(Achat $achat): self
+    {
+        if ($this->achats->contains($achat)) {
+            $this->achats->removeElement($achat);
+            // set the owning side to null (unless already changed)
+            if ($achat->getUser() === $this) {
+                $achat->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
