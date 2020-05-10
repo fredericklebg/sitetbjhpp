@@ -26,6 +26,11 @@
                 </ul>
             </div>
         </nav>
+        {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+
         <div class="container">
             {% block body %}{% endblock %}
         </div>

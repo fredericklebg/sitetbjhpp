@@ -33,6 +33,11 @@ class Marais
         $this->marche = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->marais;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,4 +85,6 @@ class Marais
 
         return $this;
     }
+
+
 }
