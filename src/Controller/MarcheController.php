@@ -30,11 +30,12 @@ class MarcheController extends AbstractController
     /**
      * @Route("/marche/{id}", name="marche_show")
      */
-    public function show(MarcheRepository $repository){
-        $marche = $repository->find('id');
+    public function show(MarcheRepository $repository, $id){
+        $marche = $repository->findOneBy(['id' => $id]);
 
         return $this->render('marche/show.html.twig', [
-            'marche' => $marche
+            'marche' => $marche,
+            'produits' => $marche->getProduit()
         ]);
     }
 
