@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer ton marais haha ^^{% endblock %}
+
+{% block body %}
+    <style>
+        .creation{
+            margin-top: 50px;
+        }
+    </style>
+
+    <section class="creation">
+        <div>
+            {{ form_start(formMarais) }}
+            {{ form_row(formMarais.marais, {'attr' :{ 'placeholder' : 'le grarais...'}}) }}
+            <button class="btn btn-success">Créer le marais</button>
+            {{ form_end(formMarais) }}
+        </div>
+
+    </section>
+{% endblock %}
