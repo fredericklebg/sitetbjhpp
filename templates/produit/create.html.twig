@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer ton produit ^^^' ^^{% endblock %}
+
+{% block body %}
+    <style>
+        .creation{
+            margin-top: 50px;
+        }
+    </style>
+
+    <section class="creation">
+        <div>
+            {{ form_start(formProduit) }}
+            {{ form_row(formProduit.name, {'attr' :{ 'placeholder' : 'le grarais...'}}) }}
+            {{ form_row(formProduit.type, {'attr' :{'placeholder' :'type de descritpion'}}) }}
+            {{ form_row(formProduit.image, {'attr' :{ 'placeholder' :'image'}}) }}
+            <button class="btn btn-success">Créer le produit</button>
+            {{ form_end(formProduit) }}
+        </div>
+
+    </section>
+{% endblock %}
