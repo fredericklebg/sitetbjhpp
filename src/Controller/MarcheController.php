@@ -28,6 +28,13 @@ class MarcheController extends AbstractController
     }
 
     /**
+     * @Route(/marche/{id}, name=marche_show)
+     */
+    public function show(){
+        return $this->render('marche/{id}');
+    }
+
+    /**
      * @param Request $request
      * @param ManagerRegistry $manager
      * @return \Symfony\Component\HttpFoundation\Response
