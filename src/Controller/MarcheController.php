@@ -20,13 +20,10 @@ class MarcheController extends AbstractController
     {
         $marches = $repository->findAll();
 
-        $produits = $repository2->findAll();
 
         return $this->render('marche/marche.html.twig', [
             'controller_name' => 'MarcheController',
             'marches' => $marches,
-            'produits' => $produits,
-
         ]);
     }
 

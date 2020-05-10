@@ -13,5 +13,12 @@
             background-repeat: no-repeat;
         }
     </style>
-
+    {% for marais in maraiss %}
+        <div class="col-6 offset-3">
+            <div class="card mt-5 text-center">
+                <p> Accéder au marais : </p>
+                <p> {{ marais }}</p>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Marais;
 use App\Form\MaraisType;
+use App\Repository\MaraisRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,13 @@ class MaraisController extends AbstractController
     /**
      * @Route("/marais", name="marais")
      */
-    public function index()
+    public function index(MaraisRepository $repository)
     {
+        $marais = $repository->findAll();
+
         return $this->render('marais/index.html.twig', [
             'controller_name' => 'MaraisController',
+            'maraiss' => $marais,
         ]);
     }
 
