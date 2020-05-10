@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,6 +32,16 @@ class Produit
      * @ORM\Column(type="string", length=255)
      */
     private $image;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Marche", mappedBy="produit")
+     */
+    private $marches;
+
+    public function __construct()
+    {
+        $this->marches = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -68,6 +80,34 @@ class Produit
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Marche[]
+     */
+    public function getMarches(): Collection
+    {
+        return $this->marches;
+    }
+
+    public function addMarch(Marche $march): self
+    {
+        if (!$this->marches->contains($march)) {
+            $this->marches[] = $march;
+            $march->addProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMarch(Marche $march): self
+    {
+        if ($this->marches->contains($march)) {
+            $this->marches->removeElement($march);
+            $march->removeProduit($this);
+        }
 
         return $this;
     }
