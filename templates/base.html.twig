@@ -26,8 +26,9 @@
                 </ul>
             </div>
         </nav>
-        {% for message in messages %}
-        <div class="flash-{{ label }}">
+
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
             {{ message }}
         </div>
 
