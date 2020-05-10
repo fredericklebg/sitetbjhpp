@@ -23,6 +23,11 @@ class Marais
      */
     private $marche;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $marais;
+
     public function __construct()
     {
         $this->marche = new ArrayCollection();
@@ -60,6 +65,18 @@ class Marais
                 $marche->setMarais(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMarais(): ?string
+    {
+        return $this->marais;
+    }
+
+    public function setMarais(string $marais): self
+    {
+        $this->marais = $marais;
 
         return $this;
     }
