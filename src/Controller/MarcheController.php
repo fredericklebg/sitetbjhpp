@@ -28,10 +28,10 @@ class MarcheController extends AbstractController
     }
 
     /**
-     * @Route(/marche/{id}, name=marche_show)
+     * @Route("/marche/{id}", name="marche_show")
      */
     public function show(){
-        return $this->render('marche/{id}');
+        return $this->render('marche/show');
     }
 
     /**
