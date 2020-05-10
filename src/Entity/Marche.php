@@ -39,6 +39,11 @@ class Marche
      */
     private $marais;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->produit = new ArrayCollection();
