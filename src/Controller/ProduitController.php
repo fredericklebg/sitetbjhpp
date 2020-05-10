@@ -43,4 +43,5 @@ class ProduitController extends AbstractController
             'formProduit' => $form->createView()
         ]);
     }
+
 }

@@ -13,9 +13,16 @@
             background-repeat: no-repeat;
         }
     </style>
+    <div style="margin-top: 13em"></div>
     {% for produit in produits %}
-        <h1>Salut les poieur</h1>
+        <div class="col-6 offset-3">
+            <div class="card mt-5 text-center">
+                <p> Accéder au marais : </p>
+                <p> {{ produit }}</p>
+            </div>
+        </div>
     {% endfor %}
+
 
 
 

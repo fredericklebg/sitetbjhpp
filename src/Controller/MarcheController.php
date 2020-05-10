@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Marche;
 use App\Form\MarcheType;
+use App\Repository\MarcheRepository;
 use App\Repository\ProduitRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,12 +16,15 @@ class MarcheController extends AbstractController
     /**
      * @Route("/marche", name="marche")
      */
-    public function index(Request $request, ManagerRegistry $manager, ProduitRepository $repository)
+    public function index(Request $request, ManagerRegistry $manager, MarcheRepository $repository, ProduitRepository $repository2)
     {
-        $produits = $repository->findAll();
+        $marches = $repository->findAll();
+
+        $produits = $repository2->findAll();
 
         return $this->render('marche/marche.html.twig', [
             'controller_name' => 'MarcheController',
+            'marches' => $marches,
             'produits' => $produits,
 
         ]);
