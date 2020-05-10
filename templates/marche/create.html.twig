@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block title %}Créer un marché{% endblock %}
+
+{% block body %}
+    {{ form_start(formMarche) }}
+
+    {{ form_row(formMarche.name) }}
+    {{ form_row(formMarche.description) }}
+    {{ form_row(formMarche.produit) }}
+    {{ form_row(formMarche.marais) }}
+    <button class="btn btn-success" type="submit">Créer le marché</button>
+    {{ form_end(formMarche) }}
+
+
+{% endblock %}
