@@ -3,5 +3,15 @@
 {% block title %}Hello Marais!{% endblock %}
 
 {% block body %}
+    <style>
+        body {
+            color:black;
+            background-color:white;
+            background-image:url({{ asset('img/geralt_de_la_rive.jpg') }});
+            background-attachment:fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
 
 {% endblock %}
