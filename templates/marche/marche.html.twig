@@ -3,6 +3,16 @@
 {% block title %}Hello MarcheController!{% endblock %}
 
 {% block body %}
+    <style>
+        body {
+            color:black;
+            background-color:white;
+            background-image:url({{ asset('img/marche.jpg') }});
+            background-attachment:fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
     {% for produit in produits %}
         <h1>Salut</h1>
     {% endfor %}
