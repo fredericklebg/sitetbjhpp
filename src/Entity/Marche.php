@@ -29,6 +29,7 @@ class Marche
     private $description;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\ManyToMany(targetEntity="App\Entity\Produit", inversedBy="marches")
      */
     private $produit;
