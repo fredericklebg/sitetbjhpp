@@ -2,12 +2,12 @@
 {% block title %}Marchés{% endblock %}
 
 {% block body %}
-    <h1>Bienvenue au marché  {{ marche.name }}</h1>
+    <h1>{{ marche.name }}</h1>
     <h3>{{ marche.description }}</h3>
 
     <ul>
         {% for item in produits %}
-            {{ item }}
+            <li>{{ item }}</li>
         {% endfor %}
     </ul>
 {% endblock %}
