@@ -11,7 +11,7 @@
 
     <section class="creation">
         <div>
-            {{ form_start(formProduit) }}
+            <form enctype="multipart/form-data" name="produit" method='post'>
             {{ form_row(formProduit.name, {'attr' :{ 'placeholder' : 'le grarais...'}}) }}
             {{ form_row(formProduit.type, {'attr' :{'placeholder' :'type de descritpion'}}) }}
             <label for="image">Image</label> <br>

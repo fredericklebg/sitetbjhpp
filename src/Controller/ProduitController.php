@@ -38,6 +38,7 @@ class ProduitController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $managerRegistry->getManager()->persist($produit);
 
+
             $target_dir = "uploads/produits/";
             $file = $_FILES['image']['name'];
             $path = pathinfo($file);
