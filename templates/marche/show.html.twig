@@ -2,6 +2,12 @@
 {% block title %}Marchés{% endblock %}
 
 {% block body %}
-    <p>Pute</p>
+    <h1>{{ marche.name }}</h1>
+    <h3>{{ marche.description }}</h3>
 
+    <ul>
+        {% for item in produits %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
