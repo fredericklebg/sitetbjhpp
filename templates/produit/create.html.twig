@@ -14,8 +14,9 @@
             {{ form_start(formProduit) }}
             {{ form_row(formProduit.name, {'attr' :{ 'placeholder' : 'le grarais...'}}) }}
             {{ form_row(formProduit.type, {'attr' :{'placeholder' :'type de descritpion'}}) }}
-            {{ form_row(formProduit.image, {'attr' :{ 'placeholder' :'image'}}) }}
-            <button class="btn btn-success">Créer le produit</button>
+            <label for="image">Image</label> <br>
+            <input type="file" name="image" id="image"> <br> <br>
+            <button class="btn btn-success">Créer le produit</button> <br>
             {{ form_end(formProduit) }}
         </div>
 
