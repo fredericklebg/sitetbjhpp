@@ -4,6 +4,10 @@
 {% block body %}
     <h1>Bienvenue au marché  {{ marche.name }}</h1>
     <h3>{{ marche.description }}</h3>
-    <p>{{ produits }}</p>
 
+    <ul>
+        {% for item in produits %}
+            {{ item }}
+        {% endfor %}
+    </ul>
 {% endblock %}
