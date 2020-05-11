@@ -35,7 +35,7 @@ class MarcheController extends AbstractController
 
         return $this->render('marche/show.html.twig', [
             'marche' => $marche,
-            'produits' => $marche->getProduit()
+            'produits' => $marche->getProduit()->getKeys()
         ]);
     }
 
