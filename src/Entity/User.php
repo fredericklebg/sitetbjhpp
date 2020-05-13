@@ -101,4 +101,10 @@ class User implements UserInterface
     {
         return ['ROLE_USER'];
     }
+
+    public function supportsClass($class)
+    {
+        return $class === User::class;
+    }
+
 }
