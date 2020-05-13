@@ -6,6 +6,7 @@
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
         <!-- Bootstrap core CSS -->
         <link href="{{ asset('css/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <script type="text/javascript" src="{{asset('css/bootstrap/js/bootstrap.js')}}"></script>
         {% block stylesheets %}{% endblock %}
     </head>
@@ -36,10 +37,16 @@
         </div>
         {% endfor %}
 
-        <div class="container">
+        <div class="container bottom-padding">
             {% block body %}{% endblock %}
         </div>
 
+        <footer class="text-center">
+
+            <p>marché de postegrechine <br> Tous droits pas réservés hihi ^^</p>
+        </footer>
+
         {% block javascripts %}{% endblock %}
     </body>
+
 </html>
