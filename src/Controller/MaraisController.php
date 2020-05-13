@@ -29,7 +29,7 @@ class MaraisController extends AbstractController
      * @param Request $request
      * @param ManagerRegistry $managerRegistry
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/create-marais",name="marais_create")
+     * @Route("/admin/create-marais",name="marais_create")
      */
     public function create(Request $request, ManagerRegistry $managerRegistry){
         $marais = new Marais();

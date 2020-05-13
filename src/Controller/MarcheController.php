@@ -45,7 +45,7 @@ class MarcheController extends AbstractController
      * @param Request $request
      * @param ManagerRegistry $manager
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/create-marche", name="marche_create")
+     * @Route("/admin/create-marche", name="marche_create")
      */
     public function createMarche(Request $request, ManagerRegistry $manager){
         $marche = new Marche();
