@@ -18,7 +18,7 @@
         <div class="col-6 offset-3">
             <div class="card mt-5 text-center">
                 <p> Accéder au marché : </p>
-                <p style="font-size: 3em"> {{ marche }}</p>
+                <a style="font-size: 3em" href={{ path('marche_show', { 'id': marche.id } ) }} >{{ marche }} </a>
                 <p class="mt-n3"> {{ marche.description }}</p>
             </div>
         </div>
