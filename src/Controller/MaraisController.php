@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Marais;
 use App\Form\MaraisType;
 use App\Repository\MaraisRepository;
+use App\Repository\MarcheRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,6 +25,19 @@ class MaraisController extends AbstractController
             'maraiss' => $marais,
         ]);
     }
+
+    /**
+     * @Route("/marais/{id}", name="marais_show")
+     */
+    public function show(MaraisRepository $repository , MarcheRepository $repository2 ,$id){
+        $marais = $repository->find($id);
+        $marches = $repository2->findBy(['marais' => $id]);
+        return $this->render('marais/show.html.twig', [
+            'marais' => $marais,
+            'marches' => $marches
+        ]);
+    }
+
 
     /**
      * @param Request $request

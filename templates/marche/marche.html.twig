@@ -14,12 +14,17 @@
         }
     </style>
     <div style="margin-top: 13em"></div>
+<div class="col-6 offset-3">
+    <div class="card mt-5 text-center">
+        <h1> Accéder aux marchés </h1>
+        <p>Voici la liste de tous les marchés disponibles</p>
+    </div>
+</div>
     {% for marche in marches %}
         <div class="col-6 offset-3">
-            <div class="card mt-5 text-center">
-                <p> Accéder au marché : </p>
+            <div class="card mt-3 text-center">
                 <a style="font-size: 3em" href={{ path('marche_show', { 'id': marche.id } ) }} >{{ marche }} </a>
-                <p class="mt-n3"> {{ marche.description }}</p>
+                <p class="mt-n2"> {{ marche.description }}</p>
             </div>
         </div>
     {% endfor %}
