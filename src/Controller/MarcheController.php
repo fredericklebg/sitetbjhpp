@@ -28,15 +28,22 @@ class MarcheController extends AbstractController
     }
 
     /**
+     * @Route("/marche/admin/edit-marche/{id}", name="marche_edit")
      * @Route("/marche/{id}", name="marche_show")
      */
     public function show(MarcheRepository $repository, ProduitRepository $produitRepository, $id){
         $marche = $repository->find($id);
         $produits = $marche->getProduit();
+        $editMode = false;
+        if($marche->getId()){
+            $editMode = true;
+        }
+
 
         return $this->render('marche/show.html.twig', [
             'marche' => $marche,
-            'produits' => $produits
+            'produits' => $produits,
+            'editMode' => $editMode
 
         ]);
     }
