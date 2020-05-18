@@ -2,13 +2,15 @@
 {% block title %}Marchés{% endblock %}
 
 {% block body %}
-    <h1>{{ marche.name }}</h1>
-    <h3>{{ marche.description }}</h3>
+    <div id="nomMarche">
+        <h1 class="text-lg-center">{{ marche.name }}</h1>
+        <h3 class="blockquote">{{ marche.description }}</h3>
+    </div>
 
-    <ul>
+    <ul class="produitsDuMarche">
         {% for produit in produits %}
-            <li>{{ produit }}
-            <img src="{{ asset(produit.getImage()) }}"> </li>
+            <p class="le-produit">{{ produit }}
+                <img src="{{ asset(produit.getImage()) }}" class="image"> </p>
         {% endfor %}
     </ul>
 {% endblock %}

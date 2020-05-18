@@ -2,6 +2,14 @@
 {% block title %}Marchés du marais {% endblock %}
 
 {% block body %}
+    <style>
+        body{
+            background-image:url({{ asset('img/geralt_de_la_rive.jpg') }});
+            background-attachment:fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
 
     {% for marche in marches %}
         <div class="col-6 offset-3">
