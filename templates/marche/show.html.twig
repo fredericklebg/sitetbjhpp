@@ -7,8 +7,8 @@
 
     <ul>
         {% for produit in produits %}
-            <li>{{ produit }}</li>
-            <li> <img src="{{ asset(produit.getImage()) }}"> </li>
+            <li>{{ produit }}
+            <img src="{{ asset(produit.getImage()) }}"> </li>
         {% endfor %}
     </ul>
 {% endblock %}
