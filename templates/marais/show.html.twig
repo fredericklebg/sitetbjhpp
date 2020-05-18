@@ -3,9 +3,12 @@
 
 {% block body %}
 
-    <ul>
-        {% for marche in marches %}
-            <li>{{ marche }}</li>
-        {% endfor %}
-    </ul>
+    {% for marche in marches %}
+        <div class="col-6 offset-3">
+            <div class="card mt-3 text-center">
+                <a style="font-size: 3em" href={{ path('marche_show', { 'id': marche.id } ) }} >{{ marche }} </a>
+                <p class="mt-n2"> {{ marche.description }}</p>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
