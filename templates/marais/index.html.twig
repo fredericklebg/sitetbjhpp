@@ -13,12 +13,14 @@
             background-repeat: no-repeat;
         }
     </style>
-    <h1> Accéder aux marais </h1>
+    <div class="col-6 offset-3">
+        <div class="card mt-5 text-center">
+            <h1> Accéder aux marais </h1>
+            <p>Accéder à un marais permet d'y trouver tous ses marchés</p>
+        </div>
+    </div>
     {% for marais in maraiss %}
         <div class="col-6 offset-3">
-            <div class="card mt-5 text-center">
-                <p>Accéder à un marais permet d'y trouver tous ses marchés</p>
-            </div>
             <div class="card mt-3 text-center">
                 <a style="font-size: 3em" href={{ path('marais_show', { 'id': marais.id } ) }} >{{ marais }} </a>
             </div>
