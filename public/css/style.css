@@ -64,3 +64,9 @@ footer p {
     border-color: #046802;
     padding: 10px 0 10px 10px
 }
+
+#richard{
+    position: fixed;
+    right: 5px;
+
+}
