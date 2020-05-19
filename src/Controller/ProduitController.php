@@ -26,7 +26,7 @@ class ProduitController extends AbstractController
      * @param Request $request
      * @param ManagerRegistry $managerRegistry
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/admin/create-produit",name="produit-create")
+     * @Route("/admin/create-produit",name="produit_create")
      */
     public function create(Request $request, ManagerRegistry $managerRegistry){
         $produit = new Produit();
