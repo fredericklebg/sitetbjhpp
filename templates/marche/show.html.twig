@@ -10,9 +10,11 @@
     <ul class="produitsDuMarche">
         {% for produit in produits %}
             <div class="le-produit mb-4" >
-                {{ produit }}
-                <img src="{{ asset(produit.getImage()) }}" class="image">
-                <span style="margin-left: 5em">{{ produit.type }}</span>
+                <div class="mt-2 tamere">
+                    <div class="my-5 ml-3">{{ produit }}</div>
+                    <img src="{{ asset(produit.getImage()) }}" class="image my-5">
+                    <div class="my-5 mx-3">{{ produit.type }}</div>
+                </div>
             </div>
         {% endfor %}
     </ul>
