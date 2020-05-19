@@ -5,7 +5,7 @@
     <div id="nomMarche">
         {% if app.user %}
             <div class="col-12">
-            <a class="text-left">{{ marche.name }}</a>
+            <a class="col-5">{{ marche.name }}</a>
             <a style="font-size: 25px; background-color: forestgreen; border-color: forestgreen" class="offset-6 btn btn-primary btn-lg active  "
                href="{{ path('marche_edit', {'id': marche.id }) }}"
                role="button" aria-pressed="true">Modifier ce marché</a>
