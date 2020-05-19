@@ -2,26 +2,24 @@
 {% block title %}Marchés{% endblock %}
 
 {% block body %}
+
     <div id="nomMarche">
-        {% if app.user %}
-            <div class="col-12">
-            <a class="col-5">{{ marche.name }}</a>
-            <a style="font-size: 25px; background-color: forestgreen; border-color: forestgreen" class="offset-3 btn btn-primary btn-lg active  "
-               href="{{ path('marche_edit', {'id': marche.id }) }}"
-               role="button" aria-pressed="true">Modifier ce marché</a>
-            </div>
-        {% else %}
-        <h1 class="text-lg-center">{{ marche.name }}</h1>
-        {% endif %}
+        <h1>{{ marche.name }}</h1>
         <h3 class="blockquote">{{ marche.description }}</h3>
 
-
     </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="text-center mt-2">
+        <a style="font-size: 25px; background-color: forestgreen; border-color: forestgreen" class="btn btn-primary btn-lg active  "
+           href="{{ path('marche_edit', {'id': marche.id }) }}"
+           role="button" aria-pressed="true">Modifier ce marché</a>
+        </div>
+    {% endif %}
 
     <ul class="produitsDuMarche">
         {% for produit in produits %}
             <div class="le-produit mb-4" >
-                <div class="mt-2 tamere">
+                <div class="mt-1 tamere">
                     <div class="my-5 ml-3">{{ produit }}</div>
                     <img src="{{ asset(produit.getImage()) }}" class="image my-5">
                     <div class="my-5 mx-3">{{ produit.type }}</div>
