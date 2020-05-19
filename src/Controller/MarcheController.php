@@ -45,12 +45,7 @@ class MarcheController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $manager->getManager()->persist($marche);
             $manager->getManager()->flush();
-            if($marche->getId() != null) {
-                $this->addFlash('success', 'bg le san t\'a créé le marché');
-            } else {
-                $this->addFlash('success', 'bg le san t\'a modifié le marché');
-            }
-
+            $this->addFlash('success', 'bg le san t\'a le marché');
             return $this->redirectToRoute('marche_show', ['id' => $marche->getId()
             ]);
 
