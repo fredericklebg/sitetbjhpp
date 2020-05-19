@@ -17,7 +17,7 @@ class ProduitController extends AbstractController
 //     */
 //    public function index()
 //    {
-//        return $this->render('produit/index.html.twig', [
+//        return $this->render('produit/yrden.html.twig', [
 //            'controller_name' => 'ProduitController',
 //        ]);
 //    }
