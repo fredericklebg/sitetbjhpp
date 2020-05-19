@@ -3,14 +3,19 @@
 
 {% block body %}
     <div id="nomMarche">
+        {% if app.user %}
+            <div class="col-12">
+            <a class="text-left">{{ marche.name }}</a>
+            <a style="font-size: 25px; background-color: forestgreen; border-color: forestgreen" class="offset-6 btn btn-primary btn-lg active  "
+               href="{{ path('marche_edit', {'id': marche.id }) }}"
+               role="button" aria-pressed="true">Modifier ce marché</a>
+            </div>
+        {% else %}
         <h1 class="text-lg-center">{{ marche.name }}</h1>
+        {% endif %}
         <h3 class="blockquote">{{ marche.description }}</h3>
 
-        {% if app.user %}
-        <a style="position:absolute; right: 401px; top: 82px; background-color: forestgreen; border-color: forestgreen"
-           href="{{ path('marche_edit', {'id': marche.id }) }}" class="btn btn-primary btn-lg active"
-           role="button" aria-pressed="true">Modifier ce marché</a>
-        {% endif %}
+
     </div>
 
     <ul class="produitsDuMarche">
