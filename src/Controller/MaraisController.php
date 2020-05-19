@@ -20,7 +20,7 @@ class MaraisController extends AbstractController
     {
         $marais = $repository->findAll();
 
-        return $this->render('marais/yrden.html.twig', [
+        return $this->render('marais/index.html.twig', [
             'controller_name' => 'MaraisController',
             'maraiss' => $marais,
         ]);

@@ -12,7 +12,7 @@ class TbController extends AbstractController
      */
     public function index()
     {
-        return $this->render('tb/yrden.html.twig', [
+        return $this->render('tb/index.html.twig', [
             'controller_name' => 'TbController',
         ]);
     }

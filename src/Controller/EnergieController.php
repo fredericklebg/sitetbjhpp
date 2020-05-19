@@ -14,7 +14,7 @@ class EnergieController extends AbstractController
     {
         $rand = rand(0,10);
         if ($rand <= 5){
-            return $this->render('energie/yrden.html.twig', [
+            return $this->render('energie/index.html.twig', [
                 'controller_name' => 'EnergieController',
             ]);
         }
