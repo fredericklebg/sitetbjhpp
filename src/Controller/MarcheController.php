@@ -28,34 +28,16 @@ class MarcheController extends AbstractController
     }
 
     /**
-     * @Route("/marche/admin/edit-marche/{id}", name="marche_edit")
-     * @Route("/marche/{id}", name="marche_show")
-     */
-    public function show(MarcheRepository $repository, ProduitRepository $produitRepository, $id){
-        $marche = $repository->find($id);
-        $produits = $marche->getProduit();
-        $editMode = false;
-        if($marche->getId()){
-            $editMode = true;
-        }
-
-
-        return $this->render('marche/show.html.twig', [
-            'marche' => $marche,
-            'produits' => $produits,
-            'editMode' => $editMode
-
-        ]);
-    }
-
-    /**
      * @param Request $request
      * @param ManagerRegistry $manager
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/admin/edit-marche/{id}", name="marche_edit")
      * @Route("/admin/create-marche", name="marche_create")
      */
-    public function createMarche(Request $request, ManagerRegistry $manager){
-        $marche = new Marche();
+    public function createMarche(Marche $marche = null, Request $request, ManagerRegistry $manager){
+        if(! $marche) {
+            $marche = new Marche();
+        }
 
         $form = $this->createForm(MarcheType::class, $marche);
         $form->handleRequest($request);
@@ -64,13 +46,35 @@ class MarcheController extends AbstractController
             $manager->getManager()->persist($marche);
             $manager->getManager()->flush();
             $this->addFlash('success', 'bg le san t\'a créé le marché');
-            return $this->redirectToRoute('marche');
+            return $this->redirectToRoute('marche_show', ['id' => $marche->getId()
+            ]);
 
         }
 
         return $this->render('marche/create.html.twig', [
-            'formMarche' => $form->createView()
+            'formMarche' => $form->createView(),
+            'editMode' => $marche->getId() != null
         ]);
 
     }
+
+    /**
+     *
+     * @Route("/marche/{id}", name="marche_show")
+     */
+    public function show(MarcheRepository $repository, ProduitRepository $produitRepository, $id){
+        $marche = $repository->find($id);
+        $produits = $marche->getProduit();
+
+
+
+        return $this->render('marche/show.html.twig', [
+            'marche' => $marche,
+            'produits' => $produits,
+
+
+        ]);
+    }
+
+
 }

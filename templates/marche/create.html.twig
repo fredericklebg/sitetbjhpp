@@ -1,40 +1,38 @@
 {% extends 'base.html.twig' %}
-{% block title %}Créer un marché{% endblock %}
+{% block title %}
+{% if not editMode %}
+     Créer un marché
+{% else %}
+    Modifier un marché
+{% endif %}
+{% endblock %}
 
-{% block body %}
-    {{ form_start(formMarche) }}
+ {% block body %}
+     {% if not editMode %}
+           <h1>Création de marché</h1>
+     {% else %}
+            <h1>Modification de marché</h1>
+     {% endif %}
 
-    {{ form_row(formMarche.name) }}
-    {{ form_row(formMarche.description) }}
-    {{ form_row(formMarche.produit) }}
-    {{ form_row(formMarche.marais) }}
-    <button class="btn btn-success" type="submit">Créer le marché</button>
-    {{ form_end(formMarche) }}
+     {{ form_start(formMarche) }}
+     {{ form_row(formMarche.name) }}
+     {{ form_row(formMarche.description) }}
+     {{ form_row(formMarche.produit) }}
+     {{ form_row(formMarche.marais) }}
 
+    <button class="btn btn-success" type="submit">
+     {% if not editMode %}
+        Créer le marché
+         {% else %}
+             Modifier le grarché
+         {% endif %}
+     </button>
 
-{% endblock
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     {{ form_end(formMarche) }}
 
 
 
-
+ {%
 
 
 
@@ -43,4 +41,59 @@
 
 
 
-%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        endblock
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ %}
