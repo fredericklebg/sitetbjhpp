@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EnergieController!{% endblock %}
+
+{% block body %}
+    <style>
+        body {
+            color:black;
+            background-color:white;
+            background-image:url({{ asset('img/puiser.jpg  ') }});
+            background-attachment:fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+
+    <div class="offset-3 col-6">
+        <div class="card" style="margin-top: 25em">
+            <a href="{{ path('tb') }}" style="font-size: 3em" class="btn alert-success btn-light">
+              puiser
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
