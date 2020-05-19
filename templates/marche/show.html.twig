@@ -5,6 +5,10 @@
     <div id="nomMarche">
         <h1 class="text-lg-center">{{ marche.name }}</h1>
         <h3 class="blockquote">{{ marche.description }}</h3>
+
+        <a style="position:absolute; right: 401px; top: 82px; background-color: forestgreen; border-color: forestgreen"
+           href="{{ path('marche_edit', {'id': marche.id }) }}" class="btn btn-primary btn-lg active"
+           role="button" aria-pressed="true">Modifier ce marché</a>
     </div>
 
     <ul class="produitsDuMarche">
@@ -16,4 +20,6 @@
             </div>
         {% endfor %}
     </ul>
+
+
 {% endblock %}
