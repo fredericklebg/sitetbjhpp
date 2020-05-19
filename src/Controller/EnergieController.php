@@ -12,7 +12,13 @@ class EnergieController extends AbstractController
      */
     public function index()
     {
-        return $this->render('energie/index.html.twig', [
+        $rand = rand(0,10);
+        if ($rand <= 5){
+            return $this->render('energie/index.html.twig', [
+                'controller_name' => 'EnergieController',
+            ]);
+        }
+        return $this->render('energie/igni.html.twig', [
             'controller_name' => 'EnergieController',
         ]);
     }
