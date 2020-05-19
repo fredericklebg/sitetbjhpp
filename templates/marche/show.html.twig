@@ -10,9 +10,10 @@
     </div>
     {% if is_granted('ROLE_ADMIN') %}
         <div class="text-center mt-2">
-        <a style="font-size: 25px; background-color: forestgreen; border-color: forestgreen" class="btn btn-primary btn-lg active  "
-           href="{{ path('marche_edit', {'id': marche.id }) }}"
-           role="button" aria-pressed="true">Modifier ce marché</a>
+            <a style="font-size: 25px; background-color: forestgreen; border-color: forestgreen" class="btn btn-primary btn-lg active"
+               href="{{ path('marche_edit', {'id': marche.id }) }}"
+               role="button" aria-pressed="true">Modifier ce marché
+            </a>
         </div>
     {% endif %}
 

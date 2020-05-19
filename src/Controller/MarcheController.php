@@ -48,7 +48,6 @@ class MarcheController extends AbstractController
             $this->addFlash('success', 'bg le san t\'a le marché');
             return $this->redirectToRoute('marche_show', ['id' => $marche->getId()
             ]);
-
         }
 
         return $this->render('marche/create.html.twig', [

@@ -19,6 +19,11 @@
         <h1> Accéder aux marchés </h1>
         <p>Voici la liste de tous les marchés disponibles</p>
     </div>
+    <div class="text-center">
+    <a href="{{ path('marche_create') }}" style="font-size: 25px; background-color: forestgreen; border-color: forestgreen"
+    class="btn btn-primary btn-lg active mt-2" role="button" aria-pressed="true">Créer un marché
+    </a>
+    </div>
 </div>
     {% for marche in marches %}
         <div class="col-6 offset-3">
