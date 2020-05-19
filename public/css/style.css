@@ -56,7 +56,7 @@ footer p {
     max-width:400px;
 }
 
-.le-produit{
+.le-produit {
     margin-left: -1.40em;
     border-style: groove;
     border-width: 6px;
@@ -64,6 +64,7 @@ footer p {
     border-color: #046802;
     padding: 10px 0 10px 10px;
     box-shadow: 2px 2px 2px lightgreen;
+}
 
 .tamere{
     display: flex;
