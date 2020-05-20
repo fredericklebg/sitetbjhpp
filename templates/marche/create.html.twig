@@ -14,11 +14,12 @@
             <h1>Modification de marché</h1>
      {% endif %}
 
-     {{ form_start(formMarche) }}
+     <form enctype="multipart/form-data" name="marche" method='post'>
      {{ form_row(formMarche.name) }}
      {{ form_row(formMarche.description) }}
      {{ form_row(formMarche.produit) }}
      {{ form_row(formMarche.marais) }}
+     <input type="file" name="image" id="image"> <br> <br>
 
     <button class="btn btn-success" type="submit">
      {% if not editMode %}
