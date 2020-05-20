@@ -109,6 +109,11 @@ class User implements UserInterface
      */
     private $produit;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $couronnes;
+
     public function __construct()
     {
         $this->produit = new ArrayCollection();
@@ -146,6 +151,18 @@ class User implements UserInterface
         if ($this->produit->contains($produit)) {
             $this->produit->removeElement($produit);
         }
+
+        return $this;
+    }
+
+    public function getCouronnes(): ?float
+    {
+        return $this->couronnes;
+    }
+
+    public function setCouronnes(float $couronnes): self
+    {
+        $this->couronnes = $couronnes;
 
         return $this;
     }

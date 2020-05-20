@@ -20,7 +20,10 @@ class SecurityController extends AbstractController
      * @Route("/inscription", name="security_registration")
      */
     public function registration(Request $request, ManagerRegistry $manager, UserPasswordEncoderInterface $encoder){
-
+        if($this->getUser() != null){
+            $this->addFlash("error", "Tu es déjà inscris ! Enflure");
+            return $this->redirectToRoute('tb');
+        }
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($request);
@@ -31,6 +34,7 @@ class SecurityController extends AbstractController
 
             $manager->getManager()->persist($user);
             $manager->getManager()->flush();
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render("security/registration.html.twig", [

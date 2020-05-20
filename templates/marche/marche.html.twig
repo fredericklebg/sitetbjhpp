@@ -14,26 +14,30 @@
         }
     </style>
     <div style="margin-top: 13em"></div>
-<div class="col-6 offset-3">
-    <div class="card mt-5 text-center">
-        <h1> Accéder aux marchés </h1>
-        <p>Voici la liste de tous les marchés disponibles</p>
+    <div class="col-6 offset-3">
+        <div class="card mt-5 text-center" style="background-color: tomato ; box-shadow: -1px 2px 2px black;">
+            <h1> Accéder aux marchés </h1>
+            <p>Voici la liste de tous les marchés disponibles</p>
+        </div>
+        <div class="text-center">
+            <a href="{{ path('marche_create') }}" style="font-size: 25px; background-color: dodgerblue; border-color: black"
+               class="btn btn-primary btn-lg active mt-2" role="button" aria-pressed="true">Créer un marché
+            </a>
+            <a href="{{ path('produit_create') }}" style="font-size: 25px; background-color: dodgerblue; border-color: black"
+               class="btn btn-primary btn-lg active mt-2" role="button" aria-pressed="true">Créer un produit
+            </a>
+        </div>
     </div>
-    <div class="text-center">
-    <a href="{{ path('marche_create') }}" style="font-size: 25px; background-color: forestgreen; border-color: black"
-    class="btn btn-primary btn-lg active mt-2" role="button" aria-pressed="true">Créer un marché
-    </a>
-    <a href="{{ path('produit_create') }}" style="font-size: 25px; background-color: forestgreen; border-color: black"
-       class="btn btn-primary btn-lg active mt-2" role="button" aria-pressed="true">Créer un produit
-    </a>
-    </div>
-</div>
     {% for marche in marches %}
         <div class="col-6 offset-3">
-            <div class="card mt-3 text-center">
-                <a style="font-size: 3em" href={{ path('marche_show', { 'id': marche.id } ) }} >{{ marche }} </a>
-                <p class="mt-n2"> {{ marche.description }}</p>
-            </div>
+            <a style="text-decoration: none" href={{ path('marche_show', { 'id': marche.id } ) }} >
+                <div class="card mt-3 text-center"
+                     style="box-shadow: -1px 2px 2px black;
+                            background-color: forestgreen; font-size: 3em; color:black">
+                    {{ marche }}
+                    <p class="mt-n2" style="font-size: 0.4em"> {{ marche.description }}</p>
+                </div>
+            </a>
         </div>
     {% endfor %}
 
