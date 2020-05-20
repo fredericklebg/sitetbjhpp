@@ -26,36 +26,42 @@ class ProduitController extends AbstractController
      * @param Request $request
      * @param ManagerRegistry $managerRegistry
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/admin/edit-produit/{id}", name="produit_edit")
      * @Route("/admin/create-produit",name="produit_create")
      */
-    public function create(Request $request, ManagerRegistry $managerRegistry){
-        $produit = new Produit();
+    public function create(Produit $produit = null, Request $request, ManagerRegistry $managerRegistry){
+        if(! $produit) {
+            $produit = new Produit();
+        }
 
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
 
         if($form->isSubmitted() && $form->isValid()){
-            $managerRegistry->getManager()->persist($produit);
 
+            if($_FILES['image']['name'] != ""){
+                $target_dir = "uploads/produits/";
+                $file = $_FILES['image']['name'];
+                $path = pathinfo($file);
+                $filename = md5(uniqid());
+                $ext = $path['extension'];
+                $temp_name = $_FILES['image']['tmp_name'];
+                $path_filename_ext = $target_dir . $filename . "." . $ext;
+                move_uploaded_file($temp_name, $path_filename_ext);
 
-            $target_dir = "uploads/produits/";
-            $file = $_FILES['image']['name'];
-            $path = pathinfo($file);
-            $filename = md5(uniqid());
-            $ext = $path['extension'];
-            $temp_name = $_FILES['image']['tmp_name'];
-            $path_filename_ext = $target_dir.$filename.".".$ext;
-            move_uploaded_file($temp_name,$path_filename_ext);
-            $produit->setImage($target_dir.$filename.".".$ext);
+                $produit->setImage($target_dir . $filename . "." . $ext);
+            }
+                $managerRegistry->getManager()->persist($produit);
+                $managerRegistry->getManager()->flush();
 
-            $managerRegistry->getManager()->flush();
+                return $this->redirectToRoute('marche');
 
-            return $this->redirectToRoute('tb');
         }
 
         return $this->render('produit/create.html.twig',[
-            'formProduit' => $form->createView()
+            'formProduit' => $form->createView(),
+            'editMode' => $produit->getId() != null
         ]);
     }
 

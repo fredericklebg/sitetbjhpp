@@ -44,16 +44,17 @@ class MarcheController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
-
-            $target_dir = "uploads/marches/";
-            $file = $_FILES['image']['name'];
-            $path = pathinfo($file);
-            $filename = md5(uniqid());
-            $ext = $path['extension'];
-            $temp_name = $_FILES['image']['tmp_name'];
-            $path_filename_ext = $target_dir.$filename.".".$ext;
-            move_uploaded_file($temp_name,$path_filename_ext);
-            $marche->setImage($target_dir.$filename.".".$ext);
+            if($_FILES['image']['name'] != ""){
+                $target_dir = "uploads/marches/";
+                $file = $_FILES['image']['name'];
+                $path = pathinfo($file);
+                $filename = md5(uniqid());
+                $ext = $path['extension'];
+                $temp_name = $_FILES['image']['tmp_name'];
+                $path_filename_ext = $target_dir . $filename . "." . $ext;
+                move_uploaded_file($temp_name, $path_filename_ext);
+                $marche->setImage($target_dir . $filename . "." . $ext);
+            }
 
             $manager->getManager()->persist($marche);
             $manager->getManager()->flush();

@@ -4,5 +4,9 @@
     <option name="pathToTranslation" value="var/cache/dev/translations" />
     <option name="directoryToWeb" value="public" />
     <option name="pluginEnabled" value="true" />
+<<<<<<< Updated upstream
+=======
+    <option name="twigBundleNamespaceSupport" value="false" />
+>>>>>>> Stashed changes
   </component>
 </project>

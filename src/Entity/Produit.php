@@ -52,6 +52,11 @@ class Produit
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prix;
+
     public function __construct()
     {
         $this->marches = new ArrayCollection();
@@ -151,6 +156,18 @@ class Produit
             $this->users->removeElement($user);
             $user->removeProduit($this);
         }
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }

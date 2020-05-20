@@ -12,12 +12,14 @@
     <section class="creation">
         <div>
             <form enctype="multipart/form-data" name="produit" method='post'>
-            {{ form_row(formProduit.name, {'attr' :{ 'placeholder' : 'le grarais...'}}) }}
-            {{ form_row(formProduit.type, {'attr' :{'placeholder' :'type de descritpion'}}) }}
-            <label for="image">Image</label> <br>
-            <input type="file" name="image" id="image"> <br> <br>
-            <button class="btn btn-success">Créer le produit</button> <br>
-            {{ form_end(formProduit) }}
+                {{ form_row(formProduit.name, {'attr' :{ 'placeholder' : 'le grarais...'}}) }}
+                {{ form_row(formProduit.type, {'attr' :{'placeholder' :'type de descritpion'}}) }}
+                {{ form_row(formProduit.prix, {'attr' : {'placeholder' : "500000001"}}) }}
+                <label for="image">Image</label> <br>
+                <input type="file" name="image" id="image"> <br> <br>
+                <button class="btn btn-success">Créer le produit</button> <br>
+
+                {{ form_end(formProduit) }}
         </div>
 
     </section>
