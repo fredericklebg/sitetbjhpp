@@ -24,13 +24,12 @@
                     <div class="my-5 ml-3">{{ produit }}</div>
                     <img src="{{ asset(produit.getImage()) }}" class="image my-5">
                     <div class="my-5 mx-3">{{ produit.type }}</div>
-
-                    <div class="mt-3 mr-n3">
-                        <a href="{{ path('marche_show', {'id': marche.id} ) }}"
-                           role="button" class="btn btn-primary" style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
-                            Acheter
-                        </a>
-                    </div>
+                </div>
+                <div class="text-center">
+                    <a href="{{ path('marche_show', {'id': marche.id} ) }}"
+                       role="button" class="btn btn-primary" style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
+                        Acheter
+                    </a>
                 </div>
             </div>
         {% endfor %}
