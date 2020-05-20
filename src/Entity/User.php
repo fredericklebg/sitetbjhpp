@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -102,6 +104,16 @@ class User implements UserInterface
      */
     private $roles = [];
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Produit", inversedBy="users")
+     */
+    private $produit;
+
+    public function __construct()
+    {
+        $this->produit = new ArrayCollection();
+    }
+
     // ...
     public function getRoles(): array
     {
@@ -110,6 +122,32 @@ class User implements UserInterface
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
+    }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduit(): Collection
+    {
+        return $this->produit;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produit->contains($produit)) {
+            $this->produit[] = $produit;
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produit->contains($produit)) {
+            $this->produit->removeElement($produit);
+        }
+
+        return $this;
     }
 
 
