@@ -78,3 +78,17 @@ footer p {
     position: fixed;
     right: 5px;
 }
+
+.lien-marche:hover{
+    text-decoration: none
+}
+
+.nbCouronnes{
+    color: #00baff;
+    text-shadow: black 1px 1px ;
+}
+
+.welcomeUser{
+    color: #00baff;
+    text-shadow: black 2px 1px 1px;
+}

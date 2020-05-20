@@ -30,7 +30,7 @@
     </div>
     {% for marche in marches %}
         <div class="col-6 offset-3">
-            <a style="text-decoration: none" href={{ path('marche_show', { 'id': marche.id } ) }} >
+            <a class="lien-marche" href={{ path('marche_show', { 'id': marche.id } ) }} >
                 <div class="card mt-3 text-center"
                      style="box-shadow: -1px 2px 2px black;
                             background-color: forestgreen; font-size: 3em; color:black">

@@ -36,7 +36,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     {%  if is_granted('IS_AUTHENTICATED_FULLY')  %}
                         <li class="nav-item">
-                            <p class="nav-link" style="color: #151515; font-size: 1.2em"> Bienvenue {{  app.user.username }} !</p>
+                            <p class="welcomeUser" style="font-size: 1.3em"><b> Bienvenue {{  app.user.username }} !</b></p>
+                            <p class="mt-n4 nbCouronnes"> <b>Vous avez {{ app.user.couronnes }} couronnes</b></p>
                         </li>
                         <li>
                             <a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
