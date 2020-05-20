@@ -40,6 +40,11 @@ class Marche
      */
     private $marais;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image;
+
     public function __toString()
     {
         return $this->name;
@@ -113,6 +118,18 @@ class Marche
     public function setMarais(?Marais $marais): self
     {
         $this->marais = $marais;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

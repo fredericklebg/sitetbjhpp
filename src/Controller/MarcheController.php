@@ -43,6 +43,18 @@ class MarcheController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+
+            $target_dir = "uploads/marches/";
+            $file = $_FILES['image']['name'];
+            $path = pathinfo($file);
+            $filename = md5(uniqid());
+            $ext = $path['extension'];
+            $temp_name = $_FILES['image']['tmp_name'];
+            $path_filename_ext = $target_dir.$filename.".".$ext;
+            move_uploaded_file($temp_name,$path_filename_ext);
+            $marche->setImage($target_dir.$filename.".".$ext);
+
             $manager->getManager()->persist($marche);
             $manager->getManager()->flush();
             $this->addFlash('success', 'bg le san t\'a le marché');
