@@ -15,11 +15,22 @@
     </style>
 
     <div class="offset-3 col-6">
-        <div class="card" style="margin-top: 25em">
-            <a href="{{ path('tb') }}" style="font-size: 3em" class="btn alert-success btn-light">
+        <div class="card" id="puisage" style="margin-top: 25em">
+            <a style="font-size: 3em" id="puiser" class="btn alert-success btn-light">
                 puiser
             </a>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).on('click','#puiser',function (event) {
+            let audio  = new Audio('music/pute.mp3');
+            audio.play();
+            $('#puisage').html('<span style="font-size: 3em" class="btn alert-success btn-light">puisage en cours</span>');
+            window.setTimeout(function(){
+                window.location.href = '/';
+            }, 4500);
+        });
+    </script>
 
 {% endblock %}
