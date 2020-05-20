@@ -3,6 +3,17 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+    <style>
+        body {
+            color:black;
+            background-color:white;
+            background-image:url({{ asset('img/gegralt_de_la_grive.jpg') }});
+            background-attachment:fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    </style>
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

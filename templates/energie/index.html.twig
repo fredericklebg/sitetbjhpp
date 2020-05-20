@@ -16,10 +16,17 @@
 
     <div class="offset-3 col-6">
         <div class="card" style="margin-top: 25em">
-            <a href="{{ path('tb') }}" style="font-size: 3em" class="btn alert-success btn-light">
+            <a id="puiser"  style="font-size: 3em" class="btn alert-success btn-light">
               puiser
             </a>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).on('click','#puiser',function (event) {
+            let audio  = new Audio('music/pute.mp3');
+            audio.play();
+        });
+    </script>
 
 {% endblock %}
