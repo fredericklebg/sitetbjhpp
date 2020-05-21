@@ -19,6 +19,8 @@
             <h1> Accéder aux marchés </h1>
             <p>Voici la liste de tous les marchés disponibles</p>
         </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
         <div class="text-center">
             <a href="{{ path('marche_create') }}" style="font-size: 25px; background-color: dodgerblue; border-color: black"
                class="btn btn-primary btn-lg active mt-2" role="button" aria-pressed="true">Créer un marché
@@ -27,6 +29,8 @@
                class="btn btn-primary btn-lg active mt-2" role="button" aria-pressed="true">Créer un produit
             </a>
         </div>
+        {% endif %}
+
     </div>
     {% for marche in marches %}
         <div class="col-6 offset-3">

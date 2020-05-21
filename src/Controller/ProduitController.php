@@ -52,10 +52,10 @@ class ProduitController extends AbstractController
 
                 $produit->setImage($target_dir . $filename . "." . $ext);
             }
-                $managerRegistry->getManager()->persist($produit);
-                $managerRegistry->getManager()->flush();
+            $managerRegistry->getManager()->persist($produit);
+            $managerRegistry->getManager()->flush();
 
-                return $this->redirectToRoute('marche');
+            return $this->redirectToRoute('marche');
 
         }
 
