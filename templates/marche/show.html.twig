@@ -34,12 +34,35 @@
                     <div class="my-5 ml-3">{{ produit }}</div>
                     <img src="{{ asset(produit.getImage()) }}" class="image my-5">
                     <div class="my-5 mx-3">{{ produit.type }}</div>
+
                 </div>
+
+                <div class="text-center offset-4"> <p class="text-center prix-produit col-6">{{ produit.prix }} couronnes</p></div>
+
                 <div class="text-center">
                     <a href="{{ path('marche_show', {'id': marche.id} )  }}"
-                       role="button" class="btn btn-primary" style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
+                       role="button" class="btn btn-primary confirmModalLink" style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
                         Acheter
+
+                        <div class="modal hide fade" id="confirmModal">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3>Confirmation de l'achat</h3>
+                            </div>
+                            <div class="modal-body">
+                                <p>Etes-vous sûr de vouloir acheter ce produit ?</p>
+                            </div>
+                            <div class="modal-footer col-7" >
+                                <a href="{{ path('marche_show', {'id': marche.id} )}}" class="btn btn-primary" id="confirmModalNo"
+                                   style="background-color: #5a6268; border-color: #5a6268">Non
+                                </a>
+                                <a href="#" class="btn btn-primary" id="confirmModalYes">Oui</a>
+                            </div>
+                        </div>
+
                     </a>
+
+                    <!-- SI LE MEC EST ADMIN AFFICHER LE LIEN POUR MODIFIER LE PRODUIT -->
                     {% if is_granted('ROLE_ADMIN') %}
                     <a href="{{ path('produit_edit', {'id': produit.id} )  }}"
                        role="button" class="btn btn-primary" style="background-color: tomato; border-color: tomato; border-width: 2px">
@@ -51,6 +74,28 @@
             </div>
         {% endfor %}
     </ul>
+
+    <script>
+        $(document).ready(function () {
+            var href;
+
+            $(".confirmModalLink").click(function(e) {
+                e.preventDefault();
+                href = $(this).attr("href");
+                $("#confirmModal").modal("show");
+            });
+
+            $("#confirmModalNo").click(function(e) {
+                $("#confirmModal").modal("hide");
+            });
+
+            $("#confirmModalYes").click(function(e) {
+                window.location.href = href;
+            });
+
+        });
+
+    </script>
 
 
 {% endblock %}

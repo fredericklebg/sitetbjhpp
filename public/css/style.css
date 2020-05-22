@@ -96,3 +96,13 @@ footer p {
     color: #00baff;
     text-shadow: black 2px 1px 1px;
 }
+
+.prix-produit{
+    color: #0094ff;
+    border-style: groove;
+    border-radius: 1px;
+    border-width: 0.1em;
+    box-shadow: 0 0 0.1em 0.05em #0094ff;
+    background-color: rgb(237,248,255);
+
+}
