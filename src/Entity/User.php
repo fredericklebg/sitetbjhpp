@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -165,6 +166,15 @@ class User implements UserInterface
         $this->couronnes = $couronnes;
 
         return $this;
+    }
+
+    public function achat(float $prix /*,int $quantity*/){
+        $total_price = $prix/* * $quantity*/;
+        if($this->getCouronnes() - $total_price < 0){
+            return "Pas assez de cash bg";
+        }
+        $this->setCouronnes($this->getCouronnes() - $total_price);
+        return $this->getCouronnes();
     }
 
 

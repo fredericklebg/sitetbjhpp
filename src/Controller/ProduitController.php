@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\User;
 use App\Form\ProduitType;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,6 +64,24 @@ class ProduitController extends AbstractController
         return $this->render('produit/create.html.twig',[
             'formProduit' => $form->createView(),
             'editMode' => $produit->getId() != null
+        ]);
+    }
+
+    /**
+     * @Route("/achat-produit/{name}", name="produit_achat")
+     * @param User $user
+     * @ParamConverter("produit", options={"mapping": {"produit_name" : "name"}})
+     * @ParamConverter("marche", options={"mapping": {"marche_id": "id" }})
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function buyProduct(User $user, Produit $produit, /*$quantity,*/ $marche_id){
+        $user->achat($produit->getPrix()/*, $quantity*/);
+
+        return $this->redirectToRoute('marche_show', [
+            'id' => $produit->getId(),
+            'marche_id' => $marche_id,
+            'produit_name' => $produit->getName(),
+            'user' => $user
         ]);
     }
 
