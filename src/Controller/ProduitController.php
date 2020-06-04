@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -70,17 +71,27 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("/achat-produit/{name}", name="produit_achat")
-     * @param User $user
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @param Produit $produit
+     * @return RedirectResponse
      */
-    public function buyProduct($id, $name, User $user, Produit $produit /*$quantity,*/){
+    public function buyProduct(Produit $produit /*$quantity,*/){
+        if($this->getUser() == null){
+            $this->addFlash("error", "Inscris-toi pour acheter sale arnaqueur");
+            return $this->redirectToRoute('marche_show', ['id' => 1]);
+        }
 
-        $user->achat($produit->getPrix()/*, $quantity*/);
+        $user = $this->getUser();
+        $total_price = $produit->getPrix() /*$quantity*/;
+        if($user->getCouronnes() - $total_price < 0){
+            $this->addFlash("error", "Pas assez de cash bg");
+        }
+        $user->setCouronnes($user->getCouronnes() - $total_price);
+
+
+        //$user->achat($produit->getPrix()/*, $quantity*/);
 
         return $this->redirectToRoute('marche_show', [
-            'id' => $id,
-            'name' => $name
-
+            'id' => 1
         ]);
     }
 

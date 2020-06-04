@@ -168,14 +168,10 @@ class User implements UserInterface
         return $this;
     }
 
-    public function achat(float $prix /*,int $quantity*/){
-        $total_price = $prix/* * $quantity*/;
-        if($this->getCouronnes() - $total_price < 0){
-            return "Pas assez de cash bg";
-        }
-        $this->setCouronnes($this->getCouronnes() - $total_price);
+    /*public function achat(float $prix /*,int $quantity){
+
         return $this->getCouronnes();
-    }
+    }*/
 
 
 }
