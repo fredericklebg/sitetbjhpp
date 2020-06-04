@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Entity\User;
 use App\Form\ProduitType;
+use App\Repository\ProduitRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -71,10 +72,12 @@ class ProduitController extends AbstractController
 
     /**
      * @Route("/achat-produit/{name}", name="produit_achat")
-     * @param Produit $produit
+     * @param ProduitRepository $produitRepository
      * @return RedirectResponse
      */
-    public function buyProduct(Produit $produit /*$quantity,*/){
+    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/){
+        $produit = $produitRepository->findOneBy(['name' => 'olala']);
+
         if($this->getUser() == null){
             $this->addFlash("error", "Inscris-toi pour acheter sale arnaqueur");
             return $this->redirectToRoute('marche_show', ['id' => 1]);
@@ -91,7 +94,7 @@ class ProduitController extends AbstractController
         //$user->achat($produit->getPrix()/*, $quantity*/);
 
         return $this->redirectToRoute('marche_show', [
-            'id' => 1
+            'id' => 1,
         ]);
     }
 
