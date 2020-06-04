@@ -56,7 +56,7 @@
                                 <a href="{{ path('marche_show', {'id': marche.id} )}}" class="btn btn-primary" id="confirmModalNo"
                                    style="background-color: #5a6268; border-color: #5a6268">Non
                                 </a>
-                                <a href="{{ path('produit_achat', {'marche_id': marche.id}, {'produit_name': produit.name}, {'user': app.user} ) }}"
+                                <a href="{{ path('produit_achat', {'id': marche.id} , {'marche_id': marche.id} ) }}"
                                    class="btn btn-primary" id="confirmModalYes">Oui</a>
                             </div>
                         </div>

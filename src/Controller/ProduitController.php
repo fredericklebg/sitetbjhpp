@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitController extends AbstractController
@@ -70,18 +71,16 @@ class ProduitController extends AbstractController
     /**
      * @Route("/achat-produit/{name}", name="produit_achat")
      * @param User $user
-     * @ParamConverter("produit", options={"mapping": {"produit_name" : "name"}})
-     * @ParamConverter("marche", options={"mapping": {"marche_id": "id" }})
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function buyProduct(User $user, Produit $produit, /*$quantity,*/ $marche_id){
+    public function buyProduct($id, $name, User $user, Produit $produit /*$quantity,*/){
+
         $user->achat($produit->getPrix()/*, $quantity*/);
 
         return $this->redirectToRoute('marche_show', [
-            'id' => $produit->getId(),
-            'marche_id' => $marche_id,
-            'produit_name' => $produit->getName(),
-            'user' => $user
+            'id' => $id,
+            'name' => $name
+
         ]);
     }
 
