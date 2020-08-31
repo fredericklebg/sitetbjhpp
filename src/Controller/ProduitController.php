@@ -88,6 +88,7 @@ class ProduitController extends AbstractController
         $total_price = $produit->getPrix() /*$quantity*/;
         if($user->getCouronnes() - $total_price < 0){
             $this->addFlash("error", "Pas assez de cash sale clochard");
+            return $this->redirectToRoute('marche_show', ['id' => 1]);
         }
         $user->setCouronnes($user->getCouronnes() - $total_price);
         $manager->getManager()->persist($user);
