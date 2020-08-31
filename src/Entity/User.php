@@ -165,7 +165,6 @@ class User implements UserInterface
     {
         $this->couronnes = $couronnes;
         echo $this->couronnes;
-        exit();
         return $this;
     }
 
