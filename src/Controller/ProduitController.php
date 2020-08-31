@@ -83,6 +83,7 @@ class ProduitController extends AbstractController
             return $this->redirectToRoute('marche_show', ['id' => 1]);
         }
 
+        /** @var \App\Entity\User $user */
         $user = $this->getUser();
         print_r($user);
         exit();
