@@ -161,7 +161,7 @@ class User implements UserInterface
         return $this->couronnes;
     }
 
-    public function setCouronnes(float $couronnes): self
+    public function setCouronnes(float $couronnes)
     {
         $this->couronnes = $couronnes;
 
