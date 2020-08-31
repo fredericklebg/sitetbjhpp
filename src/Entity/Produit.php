@@ -73,6 +73,8 @@ class Produit
         return $this->name;
     }
 
+
+
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -160,7 +162,7 @@ class Produit
         return $this;
     }
 
-    public function getPrix(): ?float
+    public function getPrix()
     {
         return $this->prix;
     }

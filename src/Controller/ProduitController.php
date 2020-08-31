@@ -86,7 +86,7 @@ class ProduitController extends AbstractController
         $user = $this->getUser();
         $total_price = $produit->getPrix() /*$quantity*/;
         if($user->getCouronnes() - $total_price < 0){
-            $this->addFlash("error", "Pas assez de cash bg");
+            $this->addFlash("error", "Pas assez de cash sale clochard");
         }
         $user->setCouronnes($user->getCouronnes() - $total_price);
 
