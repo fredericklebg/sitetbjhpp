@@ -90,6 +90,7 @@ class ProduitController extends AbstractController
             $this->addFlash("error", "Pas assez de cash sale clochard");
         }
         $user->setCouronnes(5.0);
+        echo "uauauauaua";
         exit();
         $user->setCouronnes($user->getCouronnes() - $total_price);
 
