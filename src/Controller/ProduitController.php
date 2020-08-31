@@ -75,7 +75,7 @@ class ProduitController extends AbstractController
      * @param ProduitRepository $produitRepository
      * @return RedirectResponse
      */
-    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/){
+    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/, ManagerRegistry $manager){
         $produit = $produitRepository->findOneBy(['id' => '9']);
 
         if($this->getUser() == null){
@@ -91,7 +91,8 @@ class ProduitController extends AbstractController
         }
         $user->setCouronnes(100);
         $user->setCouronnes($user->getCouronnes() - $total_price);
-
+        $manager->getManager()->persist($user);
+        $manager->getManager()->flush();
 
         //$user->achat($produit->getPrix()/*, $quantity*/);
 
