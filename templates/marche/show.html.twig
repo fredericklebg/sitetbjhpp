@@ -52,14 +52,12 @@
                             <div class="modal-body">
                                 <p>Etes-vous sûr de vouloir acheter ce produit ?</p>
                             </div>
-                            <div class="modal-footer">
-                                <div class="col-3 offset-6">
-                                    <a href="{{ path('marche_show', {'id': marche.id} )}}" class="btn btn-primary" id="confirmModalNo"
-                                       style="background-color: #5a6268; border-color: #5a6268">Non
-                                    </a>
-                                    <a href="{{ path('produit_achat', {'name': produit.name}) }}"
-                                       class="btn btn-primary" id="confirmModalYes">Oui</a>
-                                </div>
+                            <div class="col-3 offset-6">
+                                <a href="{{ path('marche_show', {'id': marche.id} )}}" class="btn btn-primary" id="confirmModalNo"
+                                   style="background-color: #5a6268; border-color: #5a6268">Non
+                                </a>
+                                <a href="{{ path('produit_achat', {'name': produit.name}) }}"
+                                   class="btn btn-primary" id="confirmModalYes">Oui</a>
                             </div>
                         </div>
 
