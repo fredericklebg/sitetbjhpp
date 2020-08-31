@@ -76,7 +76,7 @@ class ProduitController extends AbstractController
      * @return RedirectResponse
      */
     public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/){
-        $produit = $produitRepository->findOneBy(['name' => 'olala']);
+        $produit = $produitRepository->findOneBy(['id' => '9']);
 
         if($this->getUser() == null){
             $this->addFlash("error", "Inscris-toi pour acheter sale arnaqueur");
