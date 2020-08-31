@@ -78,6 +78,7 @@ class ProduitController extends AbstractController
     public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/){
         $produit = $produitRepository->findOneBy(['id' => '9']);
         print_r($produit . " pute ");
+        exit();
         if($this->getUser() == null){
             $this->addFlash("error", "Inscris-toi pour acheter sale arnaqueur");
             return $this->redirectToRoute('marche_show', ['id' => 1]);
