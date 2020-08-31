@@ -41,7 +41,7 @@
 
                 <div class="text-center">
                     <a href="{{ path('marche_show', {'id': marche.id} )  }}"
-                       role="button" class="btn btn-primary confirmModalLink" style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
+                       role="button" class="btn btn-primary" style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
                         Acheter
 
                         <div class="modal hide fade" id="confirmModal">
@@ -52,10 +52,10 @@
                                 <p>Etes-vous sûr de vouloir acheter ce produit ?</p>
                             </div>
                             <div class="text-center">
-{#                                <a href="{{ path('marche_show', {'id': marche.id} )}}"#}
-{#                                   class="btn btn-primary confirmModalLink" style="background-color: #5a6268; border-color: #5a6268">Non</a>#}
-{#                                <a href="{{ path('produit_achat', {'name': produit.name}) }}"#}
-{#                                   class="btn btn-primary">Oui</a>#}
+                                <a href="{{ path('marche_show', {'id': marche.id} )}}"
+                                   class="btn btn-primary confirmModalLink" style="background-color: #5a6268; border-color: #5a6268">Non</a>
+                                <a href="{{ path('produit_achat', {'name': produit.name}) }}"
+                                   class="btn btn-primary">Oui</a>
                             </div>
                         </div>
 
