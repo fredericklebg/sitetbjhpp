@@ -71,16 +71,16 @@ class ProduitController extends AbstractController
     }
 
     /**
-     * @Route("/achat-produit/{name}", name="produit_achat")
+     * @Route("/achat-produit/{id}/{marcheId}", name="produit_achat")
      * @param ProduitRepository $produitRepository
      * @return RedirectResponse
      */
-    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/, ManagerRegistry $manager){
-        $produit = $produitRepository->findOneBy(['id' => '9']);
+    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/, ManagerRegistry $manager,$id,$marcheId){
+        $produit = $produitRepository->findOneBy(['id' => $id]);
 
         if($this->getUser() == null){
             $this->addFlash("error", "Inscris-toi pour acheter sale arnaqueur");
-            return $this->redirectToRoute('marche_show', ['id' => 1]);
+            return $this->redirectToRoute('marche_show', ['id' => $marcheId]);
         }
 
         /** @var \App\Entity\User $user */
@@ -89,7 +89,7 @@ class ProduitController extends AbstractController
 
         if($user->getCouronnes() - $total_price < 0){
             $this->addFlash("error", "Pas assez de cash sale clochard");
-            return $this->redirectToRoute('marche_show', ['id' => 1]);
+            return $this->redirectToRoute('marche_show', ['id' => $marcheId]);
         }
         $user->setCouronnes($user->getCouronnes() - $total_price);
         $manager->getManager()->persist($user);
@@ -98,7 +98,7 @@ class ProduitController extends AbstractController
         //$user->achat($produit->getPrix()/*, $quantity*/);
 
         return $this->redirectToRoute('marche_show', [
-            'id' => 1,
+            'id' => $marcheId,
         ]);
     }
 
