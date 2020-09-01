@@ -19,20 +19,20 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('tb') }}">Accueil <span class="sr-only">(current)</span></a>
+                        <a class="nav-link aggroOn" href="{{ path('tb') }}">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('marais') }}">Marais <span class="sr-only">(current)</span></a>
+                        <a class="nav-link aggroOn" href="{{ path('marais') }}">Marais <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('marche') }}">Marché <span class="sr-only">(current)</span></a>
+                        <a class="nav-link aggroOn" href="{{ path('marche') }}">Marché <span class="sr-only">(current)</span></a>
                     </li>
                     {% if app.user %}
                     <li>
                         <a class="nav-link" href="{{ path('energie') }}"> Puiser de l'énergie</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ path('user_profile') }}"> Profil</a>
+                        <a class="nav-link aggroOn" href="{{ path('user_profile') }}"> Profil</a>
                     </li>
 
                     {% endif %}
@@ -44,7 +44,7 @@
                             <p class="mt-n4 nbCouronnes"> <b>Vous avez {{ app.user.couronnes }} couronnes</b></p>
                         </li>
                         <li>
-                            <a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                            <a class="nav-link aggroOn" href="{{ path('app_logout') }}"> Se déconnecter</a>
                         </li>
                     {% else %}
                     <li class="nav-item">
@@ -84,5 +84,9 @@
 
         {% block javascripts %}{% endblock %}
     </body>
+
+    <script>
+
+    </script>
 
 </html>
