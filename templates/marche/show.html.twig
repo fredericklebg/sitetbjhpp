@@ -41,7 +41,8 @@
 
                 <div class="text-center">
                     <a href="{{ path('marche_show', {'id': marche.id} )  }}"
-                       role="button" class="btn btn-primary confirmModal{{ produit.id }}Link" style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
+                       role="button" class="btn btn-primary confirmModal{{ produit.id }}Link" data-target="confirmModal{{ produit.id }}Link"
+                       style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
                         Acheter
                     </a>
 
