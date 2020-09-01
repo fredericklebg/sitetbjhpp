@@ -78,8 +78,8 @@ class ProduitController extends AbstractController
     public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/, ManagerRegistry $manager,int $id, int $marcheId){
         $produit = $produitRepository->findOneBy(['id' => $id]);
 
-        echo "produit :" . $id . "\n marche : " . $marcheId;
-        exit();
+//        echo "produit :" . $id . "\n marche : " . $marcheId;
+//        exit();
         if($this->getUser() == null){
             $this->addFlash("error", "Inscris-toi pour acheter sale arnaqueur");
             return $this->redirectToRoute('marche_show', ['id' => $marcheId]);
