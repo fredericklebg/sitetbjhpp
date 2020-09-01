@@ -3,6 +3,12 @@
 {% block title %}Votre Profil{% endblock %}
 
 {% block body %}
+    <style>
+        body {
+            background-image: url({{ asset('img/profil_background.jpg') }});
+        }
+    </style>
+
 <div class="container bottom-padding" style="background-color:white; margin-top: 8em">
     <div class="row">
         <div class="col-sm-12 text-center"><h1>{{app.user.username}}</h1></div>
