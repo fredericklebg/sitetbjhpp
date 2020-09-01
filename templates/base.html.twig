@@ -82,11 +82,20 @@
             <p>Marché de postegrechine <br> Tous droits pas réservés hihi ^^</p>
         </footer>
 
-        {% block javascripts %}{% endblock %}
+
+        {% block javascripts %}
+            <script type="text/javascript">
+                $(document).on('click', '.aggroOn', function (e) {
+                    let a = Math.random() * 100;
+                    if(a <= 8) {
+                        event.preventDefault();
+                        window.location.href = '/aggro';
+                    }
+                    })
+            </script>
+        {% endblock %}
     </body>
 
-    <script>
 
-    </script>
 
 </html>
