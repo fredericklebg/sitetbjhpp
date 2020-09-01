@@ -75,7 +75,7 @@ class ProduitController extends AbstractController
      * @param ProduitRepository $produitRepository
      * @return RedirectResponse
      */
-    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/, ManagerRegistry $manager,$id,$marcheId){
+    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/, ManagerRegistry $manager,int $id, int $marcheId){
         $produit = $produitRepository->findOneBy(['id' => $id]);
 
         if($this->getUser() == null){
