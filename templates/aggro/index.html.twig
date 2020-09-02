@@ -1,11 +1,71 @@
-{% extends 'base.html.twig' %}
+
 
 {% block title %}Hello AggroController!{% endblock %}
 
 {% block body %}
-<style>
-    $(document).on('click','#puiser',function (event) {
-        let audio  = new Audio('music/pute.mp3');
-        audio.play();
+    <script>
+        $(document).ready(function (e) {
+            let audio  = new Audio('music/lelelei.mp3');
+            audio.play();
+            window.setTimeout(function(){
+                window.location.href('/');
+            }, 10000 );
+        });
+    </script>
+
+    <style>
+        body{
+            background-image:url({{ asset('img/geralt_de_la_rive.jpg') }});
+            background-repeat: no-repeat;
+            background-size: cover;
+
+
+    }
+
+    #imagesnoyeurs{
+        margin-left: 100px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    #noyeur1{
+        margin-right: {{ decalmargin1 }}px;
+        width: 250px;
+        padding: 0;
+
+    }
+    #noyeur2{
+        margin-right: {{ decalmargin2 }}px;
+        width: 200px;
+    }
+    #noyeur3{
+        margin-right: {{ decalmargin3 }}px;
+        margin-left: 90px;
+        width: 280px;
+    }
+    #noyeur4{
+        margin-right: {{ decalmargin4 }}px;
+        width: 200px;
+        padding: 0;
+    }
+    #noyeur5{
+        margin-right: {{ decalmargin5 }}px;
+        width: 300px;
+
+    }
+    #noyeur6{
+        margin-right: {{ decalmargin6 }}px;
+        width: 200px;
+    }
 </style>
+    <div id="imagesnoyeurs" class="img-fluid">
+        <img class="col-4" id="noyeur1" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-4" id="noyeur2" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-6" id="noyeur3" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-4" id="noyeur4" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-4" id="noyeur5" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-2" id="noyeur6" src="{{ asset('img/le noyeur.png') }}">
+    </div>
+
 {% endblock %}
