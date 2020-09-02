@@ -53,12 +53,12 @@
     }
 </style>
     <div id="imagesnoyeurs" class="img-fluid">
-        <img class="col-4" id="noyeur1" src="{{ asset('img/le noyeur.png') }}">
-        <img class="col-4" id="noyeur2" src="{{ asset('img/le noyeur.png') }}">
-        <img class="col-6" id="noyeur3" src="{{ asset('img/le noyeur.png') }}">
-        <img class="col-4" id="noyeur4" src="{{ asset('img/le noyeur.png') }}">
-        <img class="col-4" id="noyeur5" src="{{ asset('img/le noyeur.png') }}">
-        <img class="col-2" id="noyeur6" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-4 noyeur" id="noyeur1" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-4 noyeur" id="noyeur2" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-6 noyeur" id="noyeur3" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-4 noyeur" id="noyeur4" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-4 noyeur" id="noyeur5" src="{{ asset('img/le noyeur.png') }}">
+        <img class="col-2 noyeur" id="noyeur6" src="{{ asset('img/le noyeur.png') }}">
     </div>
 
     <button style="z-index: 9999; width: 100%; position: fixed;
@@ -69,15 +69,24 @@
     </button>
 
     <script type="text/javascript">
+        let compte_Noyeurs = 6;
         $(document).ready(function () {
             $(document).on('click', '#activer-aggro', function () {
                 $(this).fadeOut('fast');
                 let audio  = new Audio('music/lelelei.mp3');
                 audio.play();
                 window.setTimeout(function(){
-                    console.log("uauauauaua");
                     window.location.href = '/';
                 }, 10000 );
+                $(document).on('click', '.noyeur', function () {
+                    compte_Noyeurs--;
+                    $(this).fadeOut('fast');
+                    if(compte_Noyeurs === 0){
+                        //TODO ajax ajout 100 couronnes et supprimer le compte si pas réussi
+                        window.location.href = '/';
+                    }
+                });
+
             });
 
         });
