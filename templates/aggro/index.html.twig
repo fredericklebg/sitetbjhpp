@@ -1,17 +1,10 @@
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 
-
-{% block title %}Hello AggroController!{% endblock %}
-
+</head>
 {% block body %}
-    <script>
-        $(document).ready(function (e) {
-            let audio  = new Audio('music/lelelei.mp3');
-            audio.play();
-            window.setTimeout(function(){
-                window.location.href('/');
-            }, 10000 );
-        });
-    </script>
+
 
     <style>
         body{
@@ -68,4 +61,26 @@
         <img class="col-2" id="noyeur6" src="{{ asset('img/le noyeur.png') }}">
     </div>
 
+    <button style="z-index: 9999; width: 100%; position: fixed;
+     top:0; height: 100%; color: #000000; background-color:#218838;
+     border-top: 0px; border-left: 0px;
+     border-bottom: 0px; border-right:0px" class="btn btn-primary text-center" id="activer-aggro">
+      <span style="font-size: 10em">CLIQUE</span>
+    </button>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', '#activer-aggro', function () {
+                $(this).fadeOut('fast');
+                let audio  = new Audio('music/lelelei.mp3');
+                audio.play();
+                window.setTimeout(function(){
+                    console.log("uauauauaua");
+                    window.location.href = '/';
+                }, 10000 );
+            });
+
+        });
+    </script>
 {% endblock %}
+
