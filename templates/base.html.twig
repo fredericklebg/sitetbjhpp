@@ -82,7 +82,7 @@
             <p>Marché de postegrechine <br> Tous droits pas réservés hihi ^^</p>
         </footer>
 
-
+    {% if app.user %}
         {% block javascripts %}
             <script type="text/javascript">
                 $(document).on('click', '.aggroOn', function (e) {
@@ -94,6 +94,7 @@
                     })
             </script>
         {% endblock %}
+    {% endif %}
     </body>
 
 
