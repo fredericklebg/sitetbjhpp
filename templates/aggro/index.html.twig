@@ -76,14 +76,15 @@
                 let audio  = new Audio('music/lelelei.mp3');
                 audio.play();
                 window.setTimeout(function(){
-                    window.location.href = '/';
+                    window.location.href = '/fail-aggro';
                 }, 10000 );
                 $(document).on('click', '.noyeur', function () {
                     compte_Noyeurs--;
                     $(this).fadeOut('fast');
                     if(compte_Noyeurs === 0){
                         //TODO ajax ajout 100 couronnes et supprimer le compte si pas réussi
-                        window.location.href = '/';
+
+                        window.location.href = '/success-aggro';
                     }
                 });
 
