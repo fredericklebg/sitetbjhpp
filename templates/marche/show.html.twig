@@ -11,7 +11,31 @@
             background-size: cover;
             background-repeat: no-repeat;
         }
+
+        #annulerAchat{
+            background-color: #5a6268;
+            border-color: #5a6268;
+        }
+
+        #buyProduct{
+            background-color: #1e7e34;
+            border-color: #1e7e34;
+            border-width: 2px;
+        }
     </style>
+
+    <script>
+        $(document).ready(function(){
+
+            $("#annulerAchat").click(function () {
+                $('.buyProductModal').hide(300);
+
+                window.setTimeout(function () {
+                    window.location.href = '{{ path('marche_show', {'id': marche.id} ) }}';
+                }, 300);
+            });
+        });
+    </script>
 
     <div id="nomMarche">
         <h1>{{ marche.name }}</h1>
@@ -40,13 +64,13 @@
                 <div class="text-center offset-4"> <p class="text-center prix-produit col-6">{{ produit.prix }} couronnes</p></div>
                 {% if app.user %}
                 <div class="text-center">
-                    <a href="{{ path('marche_show', {'id': marche.id} )  }}"
-                       role="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal{{ produit.id }}"
-                       style="background-color: #1e7e34; border-color: #1e7e34; border-width: 2px">
-                        Acheter
-                    </a>
 
-                        <div class="modal hide fade text-center" id="confirmModal{{ produit.id }}"
+                    <button id="buyProduct" href="{{ path('marche_show', {'id': marche.id} )  }}"
+                       role="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal{{ produit.id }}">
+                        Acheter
+                    </button>
+
+                        <div class="modal hide fade text-center buyProductModal" id="confirmModal{{ produit.id }}"
                              style="background-color: rgba(45,148,40,0.8); border-color: #1e7e34A0; border-width: 2px; width: 13em; height: 13em; margin-top: 3em">
                             <div class="modal-header">
                                 <h3 class="col-12 text-center">Confirmation de l'achat</h3>
@@ -54,19 +78,24 @@
                             <div class="modal-body">
                                 <p>Etes-vous sûr de vouloir acheter ce produit ?</p>
                             </div>
-                            <div class="text-center">
-                                <a href="{{ path('marche_show', {'id': marche.id} )}}"
-                                   class="btn btn-primary" style="background-color: #5a6268; border-color: #5a6268">Non</a>
 
+                            <div class="text-center">
+
+                                <button id="annulerAchat" class="btn btn-primary">Non</button>
                                 {% if app.user.couronnes < produit.prix  %}
                                     <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
                                        class="btn btn-primary" id="confirmAchatProduit" style="background-color:red; border-color: red">Oui</a>
                                 {% else %}
                                     <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
                                        class="btn btn-primary" id="confirmAchatProduit">Oui</a>
+
+                                    <p style="color: #1b1e21" class="text-center align-content-center">
+                                        <span style="color:skyblue">{{ app.user.couronnes - produit.prix}}</span> couronnes après l'achat
+                                    </p>
                                 {% endif %}
 
                             </div>
+
                         </div>
 
 

@@ -88,5 +88,4 @@ class MarcheController extends AbstractController
         ]);
     }
 
-
 }

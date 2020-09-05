@@ -11,6 +11,7 @@
             background-image:url({{ asset('img/geralt_de_la_rive.jpg') }});
             background-repeat: no-repeat;
             background-size: cover;
+            background-attachment:fixed;
 
 
     }
@@ -75,9 +76,11 @@
                 $(this).fadeOut('fast');
                 let audio  = new Audio('music/lelelei.mp3');
                 audio.play();
+                //Redirection vers tamere
                 window.setTimeout(function(){
                     window.location.href = '/fail-aggro';
                 }, 10000 );
+
                 $(document).on('click', '.noyeur', function () {
                     compte_Noyeurs--;
                     $(this).fadeOut('fast');
