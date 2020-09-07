@@ -26,13 +26,13 @@
 
     <script>
         $(document).ready(function(){
+            $("#interfaceAchat").hide(500);
+            $("#buyProduct").click(function (){
+               $("#interfaceAchat").fadeIn(500);
+            });
 
             $("#annulerAchat").click(function () {
-                $('.buyProductModal').hide(300);
-
-                window.setTimeout(function () {
-                    window.location.href = '{{ path('marche_show', {'id': marche.id} ) }}';
-                }, 300);
+                $("#interfaceAchat").hide(300);
             });
         });
     </script>
@@ -60,43 +60,31 @@
                     <div class="my-5 mx-3">{{ produit.type }}</div>
 
                 </div>
+{#                TODO utiliser twig pour faire marcher l'interface d'achat sur tous les PRODUITS#}
 
                 <div class="text-center offset-4"> <p class="text-center prix-produit col-6">{{ produit.prix }} couronnes</p></div>
                 {% if app.user %}
                 <div class="text-center">
 
-                    <button id="buyProduct" href="{{ path('marche_show', {'id': marche.id} )  }}"
-                       role="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal{{ produit.id }}">
+                    <button id="buyProduct" role="button" class="btn btn-primary">
                         Acheter
                     </button>
 
-                        <div class="modal hide fade text-center buyProductModal" id="confirmModal{{ produit.id }}"
-                             style="background-color: rgba(45,148,40,0.8); border-color: #1e7e34A0; border-width: 2px; width: 13em; height: 13em; margin-top: 3em">
-                            <div class="modal-header">
-                                <h3 class="col-12 text-center">Confirmation de l'achat</h3>
-                            </div>
-                            <div class="modal-body">
-                                <p>Etes-vous sûr de vouloir acheter ce produit ?</p>
-                            </div>
+                    <div id="interfaceAchat" class="badge-success" style="display: none">
+                        <p style="color:black">Etes-vous sûr de vouloir acheter ce produit ?</p>
+                        <button id="annulerAchat" class="btn btn-primary">Non</button>
+                        {% if app.user.couronnes < produit.prix  %}
+                            <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
+                               class="btn btn-primary" id="confirmAchatProduit" style="background-color:red; border-color: red">Oui</a>
+                        {% else %}
+                            <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
+                               class="btn btn-primary" id="confirmAchatProduit">Oui</a>
 
-                            <div class="text-center">
-
-                                <button id="annulerAchat" class="btn btn-primary">Non</button>
-                                {% if app.user.couronnes < produit.prix  %}
-                                    <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
-                                       class="btn btn-primary" id="confirmAchatProduit" style="background-color:red; border-color: red">Oui</a>
-                                {% else %}
-                                    <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
-                                       class="btn btn-primary" id="confirmAchatProduit">Oui</a>
-
-                                    <p style="color: #1b1e21" class="text-center align-content-center">
-                                        <span style="color:skyblue">{{ app.user.couronnes - produit.prix}}</span> couronnes après l'achat
-                                    </p>
-                                {% endif %}
-
-                            </div>
-
-                        </div>
+                            <p style="color: #1b1e21" class="text-center align-content-center">
+                                <span style="color:skyblue">{{ app.user.couronnes - produit.prix}}</span> couronnes après l'achat
+                            </p>
+                        {% endif %}
+                    </div>
 
 
                     <!-- SI LE MEC EST ADMIN AFFICHER LE LIEN POUR MODIFIER LE PRODUIT -->
