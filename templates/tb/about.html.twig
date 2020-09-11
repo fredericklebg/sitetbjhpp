@@ -2,9 +2,12 @@
 
 {% block body %}
     <style>
-        #about-background{
-            background: forestgreen fixed;
-
+        body{
+            background-image:url({{ asset('img/marais-de-postegresqlchin.png') }});
+            background-attachment:fixed;
+            background-size: 1920px;
+            background-repeat: no-repeat;
+            background-color: white;
         }
 
         #about-text{
@@ -24,6 +27,5 @@
             bout de vos peines.
         </p>
     </div>
-    <img id="about-background" src="{{ asset('img/marais de postegresqlchin.png') }}" alt="lemarais">
-    
+
 {% endblock %}
