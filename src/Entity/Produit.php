@@ -47,10 +47,7 @@ class Produit
      */
     private $marches;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="produit")
-     */
-    private $users;
+
 
     /**
      * @ORM\Column(type="float")
@@ -60,7 +57,29 @@ class Produit
     public function __construct()
     {
         $this->marches = new ArrayCollection();
-        $this->users = new ArrayCollection();
+        $this->userproduit = new ArrayCollection();
+
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProduit", mappedBy="produit", cascade={"persist"})
+     */
+    private $userproduit;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getUserproduit(): ArrayCollection
+    {
+        return $this->userproduit;
+    }
+
+    /**
+     * @param ArrayCollection $userproduit
+     */
+    public function setUserproduit(ArrayCollection $userproduit): void
+    {
+        $this->userproduit = $userproduit;
     }
 
     public function getId(): ?int
@@ -134,33 +153,6 @@ class Produit
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            $user->removeProduit($this);
-        }
-
-        return $this;
-    }
 
     public function getPrix()
     {

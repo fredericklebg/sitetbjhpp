@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Entity\User;
+use App\Entity\UserProduit;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -93,7 +94,14 @@ class ProduitController extends AbstractController
             $this->addFlash("error", "Pas assez de cash sale clochard");
             return $this->redirectToRoute('marche_show', ['id' => $marcheId]);
         }
+        $newProduct = new UserProduit();
+        $newProduct->setUser($user);
+        $newProduct->setProduit($produit);
         $user->setCouronnes($user->getCouronnes() - $total_price);
+        $user->addproduit($newProduct,1);
+
+        //TODO truc pour check cb il a d'item et ajouter le bon nombre
+
         $manager->getManager()->persist($user);
         $manager->getManager()->flush();
 
