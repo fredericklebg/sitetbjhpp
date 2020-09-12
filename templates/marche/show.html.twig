@@ -2,40 +2,6 @@
 {% block title %}Marchés{% endblock %}
 
 {% block body %}
-    <style>
-        body {
-            color:black;
-            background-color:white;
-            background-image:url({{ asset(marche.image) }});
-            background-attachment:fixed;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        #annulerAchat{
-            background-color: #5a6268;
-            border-color: #5a6268;
-        }
-
-        #buyProduct{
-            background-color: #1e7e34;
-            border-color: #1e7e34;
-            border-width: 2px;
-        }
-    </style>
-
-    <script>
-        $(document).ready(function(){
-
-            $("#annulerAchat").click(function () {
-                $('.buyProductModal').hide(300);
-
-                window.setTimeout(function () {
-                    window.location.href = '{{ path('marche_show', {'id': marche.id} ) }}';
-                }, 300);
-            });
-        });
-    </script>
 
     <div id="nomMarche">
         <h1>{{ marche.name }}</h1>
@@ -61,44 +27,62 @@
 
                 </div>
 
+                <style>
+                    body {
+                        color:black;
+                        background-color:white;
+                        background-image:url({{ asset(marche.image) }});
+                        background-attachment:fixed;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                    }
+
+                    .cancelBuy{{ produit.id }}{
+                        background-color: #5a6268;
+                        border-color: #5a6268;
+                    }
+
+                    .buyProduct{{ produit.id }}{
+                        background-color: #1e7e34;
+                        border-color: #1e7e34;
+                        border-width: 2px;
+                    }
+
+                    .interfaceAchat{{ produit.id }}{
+                        display: none ;
+                        padding-bottom: 5px ;
+                        margin-top: 15px;
+                        margin-left: -10px;
+                        margin-bottom: -10px
+                    }
+                </style>
+
+                <script>
+
+                    $(document).ready(function(){
+                        {#let id{{ produit.id }} = {{ produit.id }};#}
+                        let interfaceAchat{{ produit.id }} = ".interfaceAchat".concat('',{{ produit.id }});
+                        let buyProduct{{ produit.id }} = ".buyProduct".concat('',{{ produit.id }});
+                        let cancelBuy{{ produit.id }} = ".cancelBuy".concat('',{{ produit.id }});
+
+                        $(buyProduct{{ produit.id }}).click(function (){
+                            $(interfaceAchat{{ produit.id}}).fadeIn(20);
+                            {#$("#interfaceAchat".concat('' ,{{ produit.id }})).fadeIn(500);#}
+                        });
+
+                        $(cancelBuy{{ produit.id }}).click(function () {
+                            $(interfaceAchat{{ produit.id }}).hide(300);
+                        });
+                    });
+                </script>
+
                 <div class="text-center offset-4"> <p class="text-center prix-produit col-6">{{ produit.prix }} couronnes</p></div>
                 {% if app.user %}
                 <div class="text-center">
 
-                    <button id="buyProduct" href="{{ path('marche_show', {'id': marche.id} )  }}"
-                       role="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmModal{{ produit.id }}">
+                    <button role="button" class="buyProduct{{ produit.id }} btn btn-primary">
                         Acheter
                     </button>
-
-                        <div class="modal hide fade text-center buyProductModal" id="confirmModal{{ produit.id }}"
-                             style="background-color: rgba(45,148,40,0.8); border-color: #1e7e34A0; border-width: 2px; width: 13em; height: 13em; margin-top: 3em">
-                            <div class="modal-header">
-                                <h3 class="col-12 text-center">Confirmation de l'achat</h3>
-                            </div>
-                            <div class="modal-body">
-                                <p>Etes-vous sûr de vouloir acheter ce produit ?</p>
-                            </div>
-
-                            <div class="text-center">
-
-                                <button id="annulerAchat" class="btn btn-primary">Non</button>
-                                {% if app.user.couronnes < produit.prix  %}
-                                    <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
-                                       class="btn btn-primary" id="confirmAchatProduit" style="background-color:red; border-color: red">Oui</a>
-                                {% else %}
-                                    <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
-                                       class="btn btn-primary" id="confirmAchatProduit">Oui</a>
-
-                                    <p style="color: #1b1e21" class="text-center align-content-center">
-                                        <span style="color:skyblue">{{ app.user.couronnes - produit.prix}}</span> couronnes après l'achat
-                                    </p>
-                                {% endif %}
-
-                            </div>
-
-                        </div>
-
-
                     <!-- SI LE MEC EST ADMIN AFFICHER LE LIEN POUR MODIFIER LE PRODUIT -->
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('produit_edit', {'id': produit.id} )  }}"
@@ -106,6 +90,26 @@
                             Modifier le produit
                         </a>
                     {% endif %}
+
+{#                    DIV INTERFACE D'ACHAT INCROYABLE C OUF TOUT CE QUON PEUT FAIRE AVEC LE POUVOIR DE L'AMITIÉ #}
+                    <div class="badge-success interfaceAchat{{ produit.id }}">
+                        <p style="color:black">Etes-vous sûr de vouloir acheter ce produit ?</p>
+
+                        <button class="btn btn-primary cancelBuy{{ produit.id }}">Non</button>
+
+                        {% if app.user.couronnes < produit.prix  %}
+                            <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
+                               class="btn btn-primary" id="confirmAchatProduit" style="background-color:red; border-color: red">Oui</a>
+                        {% else %}
+                            <a href="{{ path('produit_achat', {'id': produit.id,'marcheId': marche.id}) }}"
+                               class="btn btn-primary" id="confirmAchatProduit">Oui</a>
+
+                            <p style="color: #1b1e21" class="text-center align-content-center">
+                                <span style="color:skyblue">{{ app.user.couronnes - produit.prix}}</span> couronnes après l'achat
+                            </p>
+                        {% endif %}
+                    </div>
+
                 </div>
                 {% endif %}
 

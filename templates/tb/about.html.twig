@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        body{
+            background-image:url({{ asset('img/marais-de-postegresqlchin.png') }});
+            background-attachment:fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: white;
+        }
+
+        #about-text{
+            font-size: 20px;
+            background-color: #1e7e34;
+            border-color: #1e7e34;
+        }
+    </style>
+
+    <div>
+        <p id="about-text" class="text-center card">
+            Le marais de postegrechine est situé à Venelles près de la Sainte-Victoire, personne ne connaît sa superficie
+            exacte mais il est facile de s'y perdre si vous n'êtes pas un wicher.
+            ATTENTION : Jeannot le célicole vous racontera sa vie de merde et vous fera chier avec ses quêtes nulles
+            si vous vous approchez de son antre.
+            N'oubliez pas d'acheter de l'huile contre les nécrophages pour survivre dans ce marais, vous n'êtes pas au
+            bout de vos peines.
+        </p>
+    </div>
+
+{% endblock %}
