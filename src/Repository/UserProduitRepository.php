@@ -28,17 +28,34 @@ class UserProduitRepository extends ServiceEntityRepository
       * @param $user User
       * @param $product Produit
       */
-    public function hasProduct($user,$product)
+    public function getProductsNumber($user,$product)
     {
         return $this->createQueryBuilder('u')
-            ->select('count(u.id)')
-            ->andWhere('u.produit_id = :pId')
-            ->andWhere('u.user_id = :uId')
+            ->select('u.quantity')
+            ->andWhere('u.produit = :pId')
+            ->andWhere('u.user = :uId')
+            ->setParameter('uId', $user->getId())
+            ->setParameter('pId', $product->getId())
+            ->getQuery()
+            ->getResult()[0]["quantity"]
+        ;
+    }
+
+    /**
+     * @return UserProduit Returns a number et surtout me fais pas chier
+     * @param $user User
+     * @param $product Produit
+     */
+    public function findUserProduct($user,$product)
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.produit = :pId')
+            ->andWhere('u.user = :uId')
             ->setParameter('uId', $user->getId())
             ->setParameter('pId', $product->getId())
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
 
 

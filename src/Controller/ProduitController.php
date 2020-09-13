@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Entity\UserProduit;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
+use App\Repository\UserProduitRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -76,7 +77,8 @@ class ProduitController extends AbstractController
      * @param ProduitRepository $produitRepository
      * @return RedirectResponse
      */
-    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/, ManagerRegistry $manager,int $id, int $marcheId){
+    public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/,UserProduitRepository $userProduitRepository,
+                               ManagerRegistry $manager,int $id, int $marcheId){
         $produit = $produitRepository->findOneBy(['id' => $id]);
 
 //        echo "produit :" . $id . "\n marche : " . $marcheId;
@@ -94,13 +96,21 @@ class ProduitController extends AbstractController
             $this->addFlash("error", "Pas assez de cash sale clochard");
             return $this->redirectToRoute('marche_show', ['id' => $marcheId]);
         }
-        $newProduct = new UserProduit();
-        $newProduct->setUser($user);
-        $newProduct->setProduit($produit);
-        $user->setCouronnes($user->getCouronnes() - $total_price);
-        $user->addproduit($newProduct,1);
+        $userProduct = $userProduitRepository->findOneBy(['user'=>$user,'produit'=>$produit]);
 
-        //TODO truc pour check cb il a d'item et ajouter le bon nombre
+        if (isset($userProduct) == 0){
+            $newProduct = new UserProduit();
+            $newProduct->setUser($user);
+            $newProduct->setProduit($produit);
+            $user->addproduit($newProduct,1);
+        }
+        else{
+            $quantity = $userProduitRepository->getProductsNumber($user,$produit);
+            $userProduct->setQuantity(++$quantity);
+        }
+        $user->setCouronnes($user->getCouronnes() - $total_price);
+
+
 
         $manager->getManager()->persist($user);
         $manager->getManager()->flush();
