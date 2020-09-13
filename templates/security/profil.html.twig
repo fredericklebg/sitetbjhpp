@@ -18,7 +18,7 @@
         <div class="col-sm-12 text-center mt-5"><h1>Inventaire</h1></div>
         <div class="mx-3 row" style="border-style: solid; border-color: black">
             {% for item in inventory %}
-            <img src="{{ asset(item.getImage()) }}" class="img-fluid my-5" alt="oui">
+            <img src="{{ asset(item.produit.image) }}" class="img-fluid my-5" alt="oui">
             {% endfor %}
         </div>
     </div>
