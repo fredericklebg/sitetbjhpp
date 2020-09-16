@@ -31,12 +31,15 @@
                         <a class="nav-link aggroOn" href="{{ path('marche') }}">Marché <span class="sr-only">(current)</span></a>
                     </li>
                     {% if app.user %}
-                    <li>
-                        <a class="nav-link" href="{{ path('energie') }}"> Puiser de l'énergie</a>
-                    </li>
-                    <li>
-                        <a class="nav-link aggroOn" href="{{ path('user_profile') }}"> Profil</a>
-                    </li>
+                        <li>
+                            <a class="nav-link" href="{{ path('energie') }}"> Puiser de l'énergie</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="{{ path('contrat') }}">Contrats</a>
+                        </li>
+                        <li>
+                            <a class="nav-link aggroOn" href="{{ path('user_profile') }}"> Profil</a>
+                        </li>
 
                     {% endif %}
                 </ul>
