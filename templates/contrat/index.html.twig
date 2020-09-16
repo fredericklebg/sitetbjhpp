@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contrats{% endblock %}
+
+{% block body %}
+    <style>
+        body{
+            background-image:url("{{ asset('img/contratsimagefond.png') }}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        #contrat-tablito {
+
+        }
+    </style>
+
+    <div id="contrats-div" class="text-center mt-5">
+        <img class="img-fluid" id="contrat-tablito" src="{{ asset('img/panneau-vide.jpg') }}" alt="Tableau Contrat">
+    </div>
+
+{% endblock %}
