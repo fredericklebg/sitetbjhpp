@@ -106,3 +106,43 @@ footer p {
     background-color: rgb(237,248,255);
 
 }
+
+#vaillefandre:hover{
+    color: #9fcdff;
+    animation-name: font-up;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+
+}
+
+.nav-link:hover{
+    animation-name: font-up-nav-link;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+#card-marche{
+    background-color: cornflowerblue;
+    box-shadow: -1px 2px 2px black;
+    color: #23272b;
+    font-size: 20px;
+    font-style: italic;
+
+}
+
+#card-list-marche{
+    box-shadow: -1px 2px 2px black;
+    background-color: cornflowerblue;
+    font-size: 3em;
+    color:#121416;
+}
+
+@keyframes font-up-nav-link {
+    100% {font-size: 18px}
+}
+
+@keyframes font-up {
+    100% {font-size: 25px}
+
+}
+

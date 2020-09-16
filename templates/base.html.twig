@@ -11,8 +11,8 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="position: sticky; top: 0; z-index:2">
-            <a class="navbar-brand" href="/">Vaillefandre</a>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:steelblue; position: sticky; top: 0; z-index:2">
+            <a id="vaillefandre" class="navbar-brand" href="/">Vaillefandre</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -32,13 +32,13 @@
                     </li>
                     {% if app.user %}
                         <li>
-                            <a class="nav-link" href="{{ path('energie') }}"> Puiser de l'énergie</a>
+                            <a class="nav-link" style="color: #b8daff;" href="{{ path('energie') }}"> Puiser de l'énergie</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="{{ path('contrat') }}">Contrats</a>
+                            <a class="nav-link" style="color: #b8daff;" href="{{ path('contrat') }}">Contrats</a>
                         </li>
                         <li>
-                            <a class="nav-link aggroOn" href="{{ path('user_profile') }}"> Profil</a>
+                            <a class="nav-link aggroOn" style="color: #eaeaea;" href="{{ path('user_profile') }}"> Profil</a>
                         </li>
 
                     {% endif %}
@@ -85,7 +85,7 @@
             {% block body %}{% endblock %}
         </div>
 
-        <footer class="text-center" style="font-size: 15px">
+        <footer class="text-center" style="background-color:steelblue ;font-size: 15px">
 
             <p>Marché de postegrechine <br> Tous droits pas réservés hihi ^^</p>
         </footer>
