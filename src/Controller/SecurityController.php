@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Repository\ProduitRepository;
+use App\Repository\UserProduitRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -67,8 +69,19 @@ class SecurityController extends AbstractController
     /**
      * @Route("/profil", name="user_profile")
      */
-    public function userProfile(){
-    return $this->render('security/profil.html.twig');
+    public function userProfile(UserProduitRepository $userProduitRepository,ProduitRepository $produitRepository){
+
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
+        $inventory = $userProduitRepository->findBy(['user'=>$user]);
+//        $inventory = [];
+//        foreach ($productsId as $id){
+//            array_push($inventory,$produitRepository->findOneBy(['id'=>$id]));
+//        }
+//        var_dump($inventory[0]->getId());
+//        exit();
+        return $this->render('security/profil.html.twig',['inventory'=>$inventory]);
     }
 
 
