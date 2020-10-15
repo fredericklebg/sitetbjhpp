@@ -66,6 +66,18 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
+//    private function array_push_assoc($array, $key, $value){
+//        $array[$key] = $value;
+//        return $array;
+//    }
+
+//    private function countProducts($products){
+//        $inventory = [];
+//        foreach ($products as $item){
+//
+//        }
+//    }
+
     /**
      * @Route("/profil", name="user_profile")
      */
@@ -74,14 +86,14 @@ class SecurityController extends AbstractController
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
 
-        $inventory = $userProduitRepository->findBy(['user'=>$user]);
+        $products = $userProduitRepository->findBy(['user'=>$user]);
 //        $inventory = [];
-//        foreach ($productsId as $id){
-//            array_push($inventory,$produitRepository->findOneBy(['id'=>$id]));
+//
+//        foreach ($products as $item){
+////            $this->array_push_assoc($inventory,$item->getProduit(),$item->getQuantity());
+//            $inventory[$item->getProduit()] = $item->getQuantity();
 //        }
-//        var_dump($inventory[0]->getId());
-//        exit();
-        return $this->render('security/profil.html.twig',['inventory'=>$inventory]);
+        return $this->render('security/profil.html.twig',['inventory'=>$products]);
     }
 
 

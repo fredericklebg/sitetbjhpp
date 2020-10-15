@@ -19,7 +19,7 @@
         <div class="mx-3 row" style="border-style: solid; border-color: black">
             {% for item in inventory %}
                 <div class="col-1">
-                    <img src="{{ asset(item.produit.image) }}" class="img-fluid my-5" alt="oui">
+                    <img src="{{ asset(item.produit.image) }}" class="img-fluid my-5" alt="{{ item.produit.name }}">
                 </div>
             {% endfor %}
         </div>
