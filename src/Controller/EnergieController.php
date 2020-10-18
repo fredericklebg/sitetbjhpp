@@ -41,7 +41,7 @@ class EnergieController extends AbstractController
 
             $user->setCouronnes($user->getCouronnes() + $bonusCouronnes);
 
-            $this->addFlash("success", "Tu as gagné 100 couronnes, bravo tu vas pouvoir t'acheter......rien");
+            $this->addFlash("success", "Tu as gagné 10 couronnes, bravo tu vas pouvoir t'acheter......rien");
             $manager->getManager()->persist($user);
             $manager->getManager()->flush();
         }
