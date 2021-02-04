@@ -54,6 +54,11 @@ class AggroController extends AbstractController
      */
     public function fail(ManagerRegistry $managerRegistry){
 
+        if ($this->isGranted("ROLE_ADMIN")){
+            echo "couillada";
+            exit();
+        }
+
         if($this->getUser() != null){
             /** @var User $user */
             $user = $this->getUser();
