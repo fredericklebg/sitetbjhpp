@@ -14,6 +14,25 @@
                 $('[data-toggle="tooltip"]').tooltip()
             })
         </script>
+        <script>
+            (function() {
+                'use strict';
+                $(() => {
+                    let random = Math.random() * 100;
+                    if(random < 15){
+                        $('#cookiemodal').modal('show');
+                    }
+                    $(document).on('click','#okdegage',function (event) {
+                        let random2 = Math.random() * 100;
+                        if(random2 < 20) {
+                            setTimeout(() => {
+                                $('#cookiemodal').modal('show');
+                            }, 500);
+                        }
+                    });
+                });
+            }) ();
+        </script>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -46,6 +65,9 @@
                         <li>
                             <a class="nav-link aggroOn" style="color: #eaeaea;" href="{{ path('user_profile') }}"> Profil</a>
                         </li>
+                        <li>
+                            <a class="nav-link aggroOn" style="color: #eaeaea;" href="{{ path('user_profile') }}"> Pack Opening</a>
+                        </li>
 
                     {% endif %}
                 </ul>
@@ -73,8 +95,28 @@
         <div id="richard">
         <a  class="btn-danger" href="http://richard-ostrowski.eu/web/cours/coursCSS.html">Site du collègue richard allez donner de la force les san </a><br>
         <a  class="btn-danger" href="https://github.com/capdigital/manytomanyattribute">github du collègue richard2 aka sauveur du site</a>
-
         </div>
+
+        <div class="modal fade" id="cookiemodal" tabindex="-1" role="dialog" aria-labelledby="cookieChiant1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cookieChiant1">Eh salut a tous on se retrouve pour une vidéo de call of duty</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ACCEPTE LES COOKIE C'est important pour l'énergie vitale du site et le sticky footer
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="okdegage" class="btn btn-secondary" data-dismiss="modal">OK dégage</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}
@@ -102,7 +144,7 @@
                 $(document).on('click', '.aggroOn', function (e) {
                     let a = Math.random() * 100;
                     if(a <= 5) {
-                        event.preventDefault();
+                        e.preventDefault();
                         window.location.href = '/aggro';
                     }
                     })

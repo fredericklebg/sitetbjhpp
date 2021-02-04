@@ -34,7 +34,7 @@ class EnergieController extends AbstractController
      */
     public function after(ManagerRegistry $manager){
         if($this->getUser() != null) {
-            $bonusCouronnes = 20;
+            $bonusCouronnes = 10;
 
             /** @var User $user */
             $user = $this->getUser();
