@@ -73,12 +73,12 @@ class ProduitController extends AbstractController
     }
 
     /**
-     * @Route("/achat-produit/{id}/{marcheId}", name="produit_achat")
+     * @Route("/achat-produit/{id}/{marcheId}/{quantity}", name="produit_achat")
      * @param ProduitRepository $produitRepository
      * @return RedirectResponse
      */
     public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/,UserProduitRepository $userProduitRepository,
-                               ManagerRegistry $manager,int $id, int $marcheId){
+                               ManagerRegistry $manager,int $id, int $marcheId, int $quantity){
         $produit = $produitRepository->findOneBy(['id' => $id]);
 
 //        echo "produit :" . $id . "\n marche : " . $marcheId;
@@ -90,7 +90,7 @@ class ProduitController extends AbstractController
 
         /** @var \App\Entity\User $user */
         $user = $this->getUser();
-        $total_price = $produit->getPrix() /*$quantity*/;
+        $total_price = $produit->getPrix() * $quantity/*$quantity*/;
 
         if($user->getCouronnes() - $total_price < 0){
             $this->addFlash("error", "Pas assez de cash sale clochard");
@@ -102,11 +102,11 @@ class ProduitController extends AbstractController
             $newProduct = new UserProduit();
             $newProduct->setUser($user);
             $newProduct->setProduit($produit);
-            $user->addproduit($newProduct,1);
+            $user->addproduit($newProduct,$quantity);
         }
         else{
-            $quantity = $userProduitRepository->getProductsNumber($user,$produit);
-            $userProduct->setQuantity(++$quantity);
+            $oldQuantity = $userProduitRepository->getProductsNumber($user,$produit);
+            $userProduct->setQuantity($oldQuantity + $quantity);
         }
         $user->setCouronnes($user->getCouronnes() - $total_price);
 
