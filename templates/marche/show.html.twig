@@ -88,14 +88,14 @@
                             <a data-id="{{ produit.id }}"
                                class="btn btn-primary oui">Oui</a>
                             <div class="row">
-                                <div class="offset-3 col-6">
-                                    <div data-id="{{ produit.id }}" class="more btn btn-primary col-1"> - </div>
+                                <div class="offset-3 col-6" data-price="{{ produit.prix }}">
+                                    <div data-id="{{ produit.id }}" class="less btn btn-primary col-1"> - </div>
                                     <span id="{{ produit.id }}" class="col-1"> 1 </span>
-                                    <div data-id="{{ produit.id }}" class="less btn btn-danger col-1"> + </div>
+                                    <div data-id="{{ produit.id }}" class="more btn btn-danger col-1"> + </div>
                                 </div>
                             </div>
                             <p style="color: #1b1e21" class="text-center align-content-center">
-                                <span style="color:skyblue">{{ app.user.couronnes - produit.prix}}</span> couronnes après l'achat
+                                <span style="color:skyblue" id="crowns{{ produit.id }}">{{ app.user.couronnes - produit.prix}}</span> couronnes après l'achat
                             </p>
                         {% endif %}
                     </div>
@@ -106,44 +106,33 @@
         {% endfor %}
     </div>
 
-{#    <script>#}
-
-{#        $(document).ready(function(){#}
-{#            let interfaceAchat{{ produit.id }} = ".interfaceAchat".concat('',{{ produit.id }});#}
-{#            let buyProduct{{ produit.id }} = ".buyProduct".concat('',{{ produit.id }});#}
-{#            let cancelBuy{{ produit.id }} = ".cancelBuy".concat('',{{ produit.id }});#}
-
-{#            $(buyProduct{{ produit.id }}).click(function (){#}
-
-{#                $(interfaceAchat{{ produit.id}}).fadeIn(20);#}
-{#            });#}
-
-{#            $(cancelBuy{{ produit.id }}).click(function () {#}
-{#                $(interfaceAchat{{ produit.id }}).hide(300);#}
-{#            });#}
-{#        });#}
-{#    </script>#}
 
     <script>
         (function() {
             'use strict';
             $(() => {
-                $(document).on('click','.more',function (event) {
-                    let id = $(this).data("id");
-                    let nb = parseInt($('#'+id).text(),10) - 1;
-                    if (nb <= 0){
-                        return;
-                    }
-                    $('#'+id).text(nb);
-                });
-
                 $(document).on('click','.less',function (event) {
                     let id = $(this).data("id");
-                    let nb = parseInt($('#'+id).text(),10) + 1;
+                    let nb = parseInt($('#'+id).text(),10) - 1;
+                    let price = $(this).parent().data("price");
+                    let currentCrowns =  parseInt($('#crowns'+id).text(),10);
                     if (nb <= 0){
                         return;
                     }
                     $('#'+id).text(nb);
+                    $('#crowns'+id).text(currentCrowns+price)
+                });
+
+                $(document).on('click','.more',function (event) {
+                    let id = $(this).data("id");
+                    let nb = parseInt($('#'+id).text(),10) + 1;
+                    let price = $(this).parent().data("price");
+                    let currentCrowns =  parseInt($('#crowns'+id).text(),10);
+                    if (nb <= 0){
+                        return;
+                    }
+                    $('#'+id).text(nb);
+                    $('#crowns'+id).text(currentCrowns-price)
                 });
 
 
