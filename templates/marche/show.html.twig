@@ -18,6 +18,36 @@
         </div>
     {% endif %}
 
+    <style>
+        body {
+            color:black;
+            background-color:white;
+            background-image:url({{ asset(marche.image) }});
+            background-attachment:fixed;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .cancelBuy{
+            background-color: #5a6268;
+            border-color: #5a6268;
+        }
+
+        .buyProduct{
+            background-color: #1e7e34;
+            border-color: #1e7e34;
+            border-width: 2px;
+        }
+
+        .interfaceAchat {
+            display: none ;
+            padding-bottom: 5px ;
+            margin-top: 15px;
+            margin-left: -10px;
+            margin-bottom: -10px
+        }
+    </style>
+
     <div class="produitsDuMarche">
     {% for produit in produits %}
     <div class="card le-produit mb-4" >
@@ -27,36 +57,6 @@
                 <div class="my-5 mx-3">{{ produit.type }}</div>
 
             </div>
-
-            <style>
-                body {
-                    color:black;
-                    background-color:white;
-                    background-image:url({{ asset(marche.image) }});
-                    background-attachment:fixed;
-                    background-size: cover;
-                    background-repeat: no-repeat;
-                }
-
-                .cancelBuy{{ produit.id }}{
-                    background-color: #5a6268;
-                    border-color: #5a6268;
-                }
-
-                .buyProduct{{ produit.id }}{
-                    background-color: #1e7e34;
-                    border-color: #1e7e34;
-                    border-width: 2px;
-                }
-
-                .interfaceAchat{{ produit.id }}{
-                    display: none ;
-                    padding-bottom: 5px ;
-                    margin-top: 15px;
-                    margin-left: -10px;
-                    margin-bottom: -10px
-                }
-            </style>
 
 
             <div class="text-center offset-4"> <p class="text-center prix-produit col-6">{{ produit.prix }} couronnes</p></div>
