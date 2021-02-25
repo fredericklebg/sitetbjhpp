@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PackOpeningController!{% endblock %}
+
+{% block body %}
+    <style>
+        body{
+            background-image: url("{{ asset('img/elprimo.png') }}");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+    <div class="text-center img-fluid">
+        <img id="megaboite" src="{{ asset('img/megaboite.png') }}" alt="megaboite">
+    </div>
+{% endblock %}

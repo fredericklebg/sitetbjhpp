@@ -137,6 +137,11 @@ footer p {
     color:#121416;
 }
 
+#megaboite{
+   width: 500px;
+
+}
+
 @keyframes font-up-nav-link {
     100% {font-size: 18px}
 }
