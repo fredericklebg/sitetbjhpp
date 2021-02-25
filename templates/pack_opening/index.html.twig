@@ -11,8 +11,70 @@
             background-size: cover;
             background-attachment: fixed;
         }
+
+        #megaboite:active {
+            animation: shake 0.5s;
+            animation-iteration-count: 4;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        #megaboite{
+            margin-top: 10em;
+        }
+
     </style>
+
+{#    TODO ANIMATION DE MERDE PROGRESS BAR LA LE TRUC LA MAIS SI CE MEC LA....<div class="progress">#}
+{#        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#    </div>#}
+{#    <div class="progress">#}
+{#        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#    </div>#}
+{#    <div class="progress">#}
+{#        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#    </div>#}
+{#    <div class="progress">#}
+{#        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#    </div>#}
+{#    <div class="progress">#}
+{#        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#    </div>#}
+
     <div class="text-center img-fluid">
-        <img id="megaboite" src="{{ asset('img/megaboite.png') }}" alt="megaboite">
+        <img draggable="false" id="megaboite" src="{{ asset('img/megaboite.png') }}" alt="megaboite">
     </div>
+
+
+    <script type=text/javascript>
+        (function() {
+            'use strict';
+            $(() => {
+                    let tId = 0;
+                    $('#megaboite').on('mousedown', function() {
+                        tId = setTimeout(gigopening, 2000);
+                    }).on('mouseup mouseleave', function() {
+                        clearTimeout(tId);
+                    });
+
+                    function gigopening() {
+                        console.log("pd de pd")
+                    }
+            });
+        }) ();
+    </script>
+
+
 {% endblock %}

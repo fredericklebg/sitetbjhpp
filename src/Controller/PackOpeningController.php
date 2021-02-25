@@ -21,4 +21,11 @@ class  PackOpeningController extends AbstractController
             $this->redirectToRoute('app_login');
         }
     }
+
+    /**
+     * @Route("/pack-opened", name="pack_opened")
+     */
+    public function openBox(){
+
+    }
 }
