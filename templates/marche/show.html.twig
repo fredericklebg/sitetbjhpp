@@ -21,7 +21,6 @@
     <div class="produitsDuMarche">
     {% for produit in produits %}
     <div class="card le-produit mb-4" >
-        <div class="card le-produit mb-4" >
             <div class="mt-1 tamere">
                 <div class="my-5 ml-3">{{ produit }}</div>
                 <img src="{{ asset(produit.getImage()) }}" class="image my-5">
@@ -59,30 +58,12 @@
                 }
             </style>
 
-            <script>
-
-                $(document).ready(function(){
-                    {#let id{{ produit.id }} = {{ produit.id }};#}
-                    let interfaceAchat{{ produit.id }} = ".interfaceAchat".concat('',{{ produit.id }});
-                    let buyProduct{{ produit.id }} = ".buyProduct".concat('',{{ produit.id }});
-                    let cancelBuy{{ produit.id }} = ".cancelBuy".concat('',{{ produit.id }});
-
-                    $(buyProduct{{ produit.id }}).click(function (){
-                        $(interfaceAchat{{ produit.id}}).fadeIn(20);
-                        {#$("#interfaceAchat".concat('' ,{{ produit.id }})).fadeIn(500);#}
-                    });
-
-                    $(cancelBuy{{ produit.id }}).click(function () {
-                        $(interfaceAchat{{ produit.id }}).hide(300);
-                    });
-                });
-            </script>
 
             <div class="text-center offset-4"> <p class="text-center prix-produit col-6">{{ produit.prix }} couronnes</p></div>
             {% if app.user %}
                 <div class="text-center">
 
-                    <button role="button" class="buyProduct{{ produit.id }} btn btn-primary">
+                    <button role="button" data-id="{{ produit.id }}" class="buyProduct btn btn-primary">
                         Acheter
                     </button>
                     <!-- SI LE MEC EST ADMIN AFFICHER LE LIEN POUR MODIFIER LE PRODUIT -->
@@ -94,10 +75,10 @@
                     {% endif %}
 
                     {#                    DIV INTERFACE D'ACHAT INCROYABLE C OUF TOUT CE QUON PEUT FAIRE AVEC LE POUVOIR DE L'AMITIÉ #}
-                    <div class="badge-success interfaceAchat{{ produit.id }}">
+                    <div class="badge-success" style="display: none" id="interfaceAchat{{ produit.id }}">
                         <p style="color:black">Etes-vous sûr de vouloir acheter ce produit ?</p>
 
-                        <a class="btn btn-primary non{{ produit.id }}">Non</a>
+                        <a class="btn btn-primary cancelBuy" data-id="{{ produit.id }}">Non</a>
 
                         {% if app.user.couronnes < produit.prix  %}
                             <a data-id="{{ produit.id }}"
@@ -121,10 +102,27 @@
 
                 </div>
             {% endif %}
-
         </div>
         {% endfor %}
     </div>
+
+{#    <script>#}
+
+{#        $(document).ready(function(){#}
+{#            let interfaceAchat{{ produit.id }} = ".interfaceAchat".concat('',{{ produit.id }});#}
+{#            let buyProduct{{ produit.id }} = ".buyProduct".concat('',{{ produit.id }});#}
+{#            let cancelBuy{{ produit.id }} = ".cancelBuy".concat('',{{ produit.id }});#}
+
+{#            $(buyProduct{{ produit.id }}).click(function (){#}
+
+{#                $(interfaceAchat{{ produit.id}}).fadeIn(20);#}
+{#            });#}
+
+{#            $(cancelBuy{{ produit.id }}).click(function () {#}
+{#                $(interfaceAchat{{ produit.id }}).hide(300);#}
+{#            });#}
+{#        });#}
+{#    </script>#}
 
     <script>
         (function() {
@@ -155,6 +153,20 @@
                     let produitId = $(this).data("id");
                     let nb = parseInt($('#'+produitId).text(),10);
                     window.location.href = '/achat-produit/'+produitId+'/'+marcheId+'/'+nb;
+                });
+
+                $(document).on('click','.buyProduct',function (event) {
+                    event.preventDefault();
+                    let produitId = $(this).data("id");
+                    let interfaceAchat = "#interfaceAchat"+produitId;
+                    $(interfaceAchat).fadeIn(20);
+                });
+
+                $(document).on('click','.cancelBuy',function (event) {
+                    event.preventDefault();
+                    let produitId = $(this).data("id");
+                    let interfaceAchat = "#interfaceAchat"+produitId;
+                    $(interfaceAchat).fadeOut(20);
                 });
 
             });
