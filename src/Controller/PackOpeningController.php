@@ -58,9 +58,20 @@ class  PackOpeningController extends AbstractController
      * @return Response
      */
     public function openBox(ProduitRepository $produitRepository, UserProduitRepository $userProduitRepository, Request $request, ManagerRegistry $manager){
-//        $obj = new Stdclass();
-////        $obj->message = 'cool';
-//    echo json_encode($obj);
+        if ($this->getUser() == null) {
+            $this->addFlash("error", "Inscris-toi pour faire un pack opening bordel");
+            return $this->redirectToRoute('pack_opening');
+        }
+
+        /** @var User $user */
+        $user = $this->getUser();
+//
+//        if($user->getCouronnes() < 200){
+//            $this->addFlash("error", "Tu crois que le pack est gratuit clochard ???" .
+//                " Eh ouai c trop jvais péter un cable");
+//            return $this->redirectToRoute('pack_opening');
+//        }
+        $user->setCouronnes(5000);
 
         //Récupère les données d'ajax depuis index dans le Template de packopening
         $produits = $request->get('produit');
@@ -68,22 +79,15 @@ class  PackOpeningController extends AbstractController
         $imgNames = array();
         $obj = new Stdclass();
         if(isset($produits)) {
+
             foreach ($produits as $produit) {
                 $produit = $produitRepository->findOneBy(['id' => $produit]);
 
                 array_push($images,$produit->getImage());
                 array_push($imgNames, $produit->getName());
 //                array_push($images, $imageProduit);
-
 //        echo "produit :" . $id . "\n marche : " . $marcheId;
 //        exit();
-                if ($this->getUser() == null) {
-                    $this->addFlash("error", "Inscris-toi pour faire un pack opening bordel");
-                    return $this->redirectToRoute('pack_opening');
-                }
-
-                /** @var \App\Entity\User $user */
-                $user = $this->getUser();
 
                 $userProduct = $userProduitRepository->findOneBy(['user' => $user, 'produit' => $produit]);
 
@@ -96,15 +100,17 @@ class  PackOpeningController extends AbstractController
                     $oldQuantity = $userProduitRepository->getProductsNumber($user, $produit);
                     $userProduct->setQuantity($oldQuantity + 1);
                 }
-                $manager->getManager()->persist($user);
-                $manager->getManager()->flush();
+
             }
             $obj->images = $images;
             $obj->names = $imgNames;
 
 
         }
+
         echo json_encode($obj);
+        $manager->getManager()->persist($user);
+        $manager->getManager()->flush();
     return new Response();
     }
 }

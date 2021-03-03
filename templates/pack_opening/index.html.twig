@@ -103,22 +103,20 @@
                             }
                             produitsLoot.push(randomId);
                         }
+                        //Ajax pour les pack opening
                         $.ajax({
                             url:'/pack-opened',/*$(this).attr('action')*/
                             method:'post',/*$(this).attr('method')*/
                             data:{produit : produitsLoot},
                             dataType:'JSON'
                         }).done(function (data) {
-
+                            console.log(data);
                             for(let i = 0; i<data.images.length; i++){
                                 setTimeout(function (){
                                     $("#loot" + i).attr('src', data.images[i]).attr('data-original-title', data.names[i]).fadeIn(1000);
                                 },(i)*1000);
                             }
-                            console.log(data);
                         });
-                        {#console.log({{ produits[0][randomId] }});#}
-                        {#{{ app.user.addproduit({{ produits[0][randomId]}}) }}#}
                     }
             });
         }) ();
