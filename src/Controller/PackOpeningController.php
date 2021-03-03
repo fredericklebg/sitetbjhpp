@@ -25,14 +25,14 @@ class  PackOpeningController extends AbstractController
 {
     /**
      * @Route("/pack-opening", name="pack_opening")
-     * @param MarcheRepository $repository
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param ProduitRepository $repository
+     * @return Response
      */
-    public function index(ProduitRepository $repository)
+    public function index(ProduitRepository $repository): Response
     {
 
         if($this->getUser() != null) {
-
+            //Fout dans le tableau ids les ids de TOUS les produits du site
             $produits = $repository->getAllIds();
             $ids = array();
             foreach($produits as $produit){
@@ -41,12 +41,12 @@ class  PackOpeningController extends AbstractController
 
             return $this->render('pack_opening/index.html.twig', [
                 'controller_name' => 'PackOpeningController',
-                'produits'=>$produits,
                 'ids'=>$ids
             ]);
-        } else{
-            $this->redirectToRoute('app_login');
         }
+        //Si pas connecté
+        $this->addFlash("error", "Inscris-toi pour faire un pack opening bordel");
+        return $this->redirectToRoute('app_login');
     }
 
     /**
@@ -61,16 +61,24 @@ class  PackOpeningController extends AbstractController
 //        $obj = new Stdclass();
 ////        $obj->message = 'cool';
 //    echo json_encode($obj);
-        $produits = $request->get('produit');
-        if(isset($produits)) {
 
+        //Récupère les données d'ajax depuis index dans le Template de packopening
+        $produits = $request->get('produit');
+        $images = array();
+        $imgNames = array();
+        $obj = new Stdclass();
+        if(isset($produits)) {
             foreach ($produits as $produit) {
                 $produit = $produitRepository->findOneBy(['id' => $produit]);
+
+                array_push($images,$produit->getImage());
+                array_push($imgNames, $produit->getName());
+//                array_push($images, $imageProduit);
 
 //        echo "produit :" . $id . "\n marche : " . $marcheId;
 //        exit();
                 if ($this->getUser() == null) {
-                    $this->addFlash("error", "Inscris-toi pour acheter sale arnaqueur");
+                    $this->addFlash("error", "Inscris-toi pour faire un pack opening bordel");
                     return $this->redirectToRoute('pack_opening');
                 }
 
@@ -91,7 +99,12 @@ class  PackOpeningController extends AbstractController
                 $manager->getManager()->persist($user);
                 $manager->getManager()->flush();
             }
+            $obj->images = $images;
+            $obj->names = $imgNames;
+
+
         }
+        echo json_encode($obj);
     return new Response();
     }
 }
