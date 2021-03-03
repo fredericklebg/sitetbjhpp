@@ -31,10 +31,6 @@
             100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
 
-        #megaboite{
-            margin-top: 10em;
-        }
-
     </style>
 
 {#    TODO ANIMATION DE MERDE PROGRESS BAR LA LE TRUC LA MAIS SI CE MEC LA....<div class="progress">#}
@@ -63,6 +59,17 @@
             'use strict';
             $(() => {
                     let tId = 0;
+
+                    var produitTab;
+                    produitTab = '{{ ids|json_encode}}';
+                    let ids = produitTab.slice(1,produitTab.length).split(',');
+                    console.log(ids.includes('21'));
+                    console.log(ids[5]);
+                    // for(let i = 0 ; i<produitTab.length ; i++){
+                    //     tabIds.push(produitTab[i].id)
+                    // }
+
+
                     $('#megaboite').on('mousedown', function() {
                         tId = setTimeout(gigopening, 2000);
                     }).on('mouseup mouseleave', function() {
@@ -70,7 +77,24 @@
                     });
 
                     function gigopening() {
-                        console.log("pd de pd")
+                        let produitsLoot = Array();
+                        for(let i = 0; i < 5; i++){
+                            let randomId = Math.floor(Math.random() * Math.floor({{ids|length}}));
+                            if(randomId === 0 || ! ids.includes(randomId.toString())){
+                                break;
+                            }
+                            produitsLoot.push(randomId);
+                        }
+                        $.ajax({
+                            url:'/pack-opened',/*$(this).attr('action')*/
+                            method:'post',/*$(this).attr('method')*/
+                            data:{produit : produitsLoot},
+                            dataType:'JSON'
+                        }).done(function () {
+
+                        });
+                        {#console.log({{ produits[0][randomId] }});#}
+                        {#{{ app.user.addproduit({{ produits[0][randomId]}}) }}#}
                     }
             });
         }) ();

@@ -47,4 +47,11 @@ class ProduitRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getAllIds(){
+        return $this->createQueryBuilder('p')
+            ->select('p.id')
+            ->getQuery()
+            ->getResult();
+    }
 }

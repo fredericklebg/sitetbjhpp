@@ -35,7 +35,7 @@ class SecurityController extends AbstractController
             $user->setPassword($hash);
             $user->setCouronnes(50);
 
-            $this->addFlash("success", "Tu es maintenant inscris, vas faire un petit pack opening en t'attendant");
+            $this->addFlash("success", "Tu es maintenant inscrist, vas faire un petit pack opening en t'attendant");
             $manager->getManager()->persist($user);
             $manager->getManager()->flush();
             return $this->redirectToRoute('app_login');
