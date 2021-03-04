@@ -11,9 +11,50 @@
             background-attachment: fixed;
 
         }
+        #description{
+            position: absolute;
+            height: 60%;
+            right: -20%;
+            width: 20em;
+            background: linear-gradient(70deg,white,grey);
+        }
+
+        .description-animation-show{
+            -webkit-animation:linear;
+            -webkit-animation-name: show;
+            -webkit-animation-duration: 0.8s;
+        }
+
+        .description-animation-hide{
+            -webkit-animation:linear;
+            -webkit-animation-name: hide;
+            -webkit-animation-duration: 0.8s;
+        }
+
+
+        @-webkit-keyframes show {
+            0% { right: -20%;}
+            25% { right: -15%;}
+            50% { right: -10%;}
+            75% { right: -5%;}
+            100%{ right: 0;}
+        }
+
+        @-webkit-keyframes hide {
+            0% { right: 0;}
+            25% { right: -5%;}
+            50% { right: -10%;}
+            75% { right: -15%;}
+            100%{ right: -20%;}
+        }
     </style>
 
     <div class="container bottom-padding" style="background-color:white; margin-top: 8em; border-radius: 10px">
+
+        <div class="card" id="description">
+
+        </div>
+
         <div class="row">
             <div class="col-sm-12 text-center"><h1>{{app.user.username}}</h1></div>
             <div style="font-size: 1.2em" class="col-sm-12 text-center"><span>{{app.user.email}}</span></div>
@@ -24,7 +65,7 @@
                 {% for item in inventory %}
                     <div class="col-3">
                         <div style="width: 7vw; height: 7vw" >
-                            <img src="{{ asset(item.produit.image) }}" class="img-fluid m-3" alt="{{ item.produit.name }}" style="height: 50%"
+                            <img src="{{ asset(item.produit.image) }}" data-description="{{ item.produit.type }}" class="product img-fluid m-3" alt="{{ item.produit.name }}" style="height: 50%"
                                  data-toggle="tooltip" data-placement="top" title="{{ item.produit.name }}">
                             <div class="mt-n4"><b>x{{ item.quantity }}</b></div>
                         </div>
@@ -32,6 +73,31 @@
                 {% endfor %}
             </div>
         </div>
+
     </div>
+
+    <script type="text/javascript">
+
+        (function() {
+            'use strict';
+            $(() => {
+
+                $(document).on('click','.product',function (event) {
+                    event.stopPropagation();
+                    $('#description').addClass("description-animation-show").removeClass("description-animation-hide").css('right',"0");
+                    $('#description').empty();
+                    $('#description').append('<p>' + $(this).data('description') + '</p>');
+                    console.log("oui");
+                });
+
+                $(document).on('click','*:not( .product )',function (event) {
+                    $('#description').addClass("description-animation-hide").removeClass("description-animation-show").css('right',"-20%");
+                    console.log("non");
+                });
+
+            });
+        }) ();
+
+    </script>
 
 {% endblock %}
