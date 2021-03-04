@@ -75,7 +75,7 @@
                     {%  if is_granted('IS_AUTHENTICATED_FULLY')  %}
                         <li class="nav-item">
                             <p class="welcomeUser" style="font-size: 1.3em"><b> Bienvenue {{  app.user.username }} !</b></p>
-                            <p class="mt-n4 nbCouronnes"> <b>Vous avez {{ app.user.couronnes }} couronnes</b></p>
+                            <p class="mt-n4 nbCouronnes"> <b>Vous avez <span id="nbCouronnes">{{ app.user.couronnes }}</span> couronnes</b></p>
                         </li>
                         <li>
                             <a class="nav-link aggroOn" href="{{ path('app_logout') }}"> Se déconnecter</a>

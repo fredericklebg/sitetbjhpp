@@ -54,6 +54,17 @@
             color: #916319;
         }
 
+        #coutPackOpening{
+            position:fixed;
+            top:10%;
+            right: 75%;
+            font-size: 45px;
+            color: cornflowerblue;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: #000000;
+            font-family: "Cooper Black", serif;
+        }
+
     </style>
 
     {#    TODO ANIMATION DE MERDE PROGRESS BAR LA LE TRUC LA MAIS SI CE MEC LA....<div class="progress">#}
@@ -88,6 +99,10 @@
         <img draggable="false" id="megaboite" src="{{ asset('img/megaboite.png') }}" alt="megaboite">
     </div>
 
+    <div class="text-center" id="coutPackOpening">
+        <p>Prix d'un pack opening : 200 Couronnes</p>
+    </div class="text-center">
+
     <div class="card" id="messagepackopening">
         <p>Tu crois que le pack est gratuit clochard ??? Eh ouai c trop jvais péter un cable T___T</p>
     </div>
@@ -98,22 +113,33 @@
             'use strict';
             $(() => {
                 let tId = 0;
+                let nbCouronnes = {{ app.user.couronnes }}
                 var produitTab;
+                //AUDIOS
+                let audio1  = new Audio('music/get_powerpoints_01v2.ogg');
+                let audio2  = new Audio('music/get_powerpoints_02v2.ogg');
+                let audio3  = new Audio('music/get_powerpoints_03v2.ogg');
+                audio1.playbackRate = 1.5;
+                audio2.playbackRate = 1.5;
+                audio3.playbackRate = 1.5;
+
+                //faites pas attention à ce truc
                 produitTab = '{{ ids|json_encode}}';
                 let ids = produitTab.slice(1,produitTab.length).split(',');
+
                 // for(let i = 0 ; i<produitTab.length ; i++){
                 //     tabIds.push(produitTab[i].id)
                 // }
                 $('#megaboite').on('mousedown', function () {
                     tId = setTimeout(gigopening, 2000);
+
                 }).on('mouseup mouseleave', function () {
                     clearTimeout(tId);
                 });
 
                 function gigopening() {
-                    if('{{ app.user.couronnes }}' >= 200) {
-
-
+                    let indexLoot = 1;
+                    if(nbCouronnes >= 200) {
                         $(".loot img").hide();
                         let produitsLoot = Array();
                         for (let i = 0; i < 5; i++) {
@@ -130,12 +156,44 @@
                             data: {produit: produitsLoot},
                             dataType: 'JSON'
                         }).done(function (data) {
-                            console.log(data);
-                            for (let i = 0; i < data.images.length; i++) {
-                                setTimeout(function () {
-                                    $("#loot" + i).attr('src', data.images[i]).attr('data-original-title', data.names[i]).fadeIn(1000);
-                                }, (i) * 1000);
-                            }
+                            $('#nbCouronnes').text(data.currentCouronnes);
+                            nbCouronnes = data.currentCouronnes;
+
+                            // for (let i = 0; i < data.images.length; i++) {
+                                // setTimeout(function () {
+                                //     $("#loot" + i).attr('src', data.images[i]).attr('data-original-title', data.names[i]).fadeIn(1000);
+                                //     // audio1.play();
+                                //     audio2.play();
+                                //     // audio3.play();
+                                // }, (i) * 1000);
+
+                            // }
+
+                            //AFFICHE LE PREMIER ITEM AUTOMATIQUEMENT
+                            $("#loot0").attr('src', data.images[0]).attr('data-original-title', data.names[0]).fadeIn(200);
+                            audio1.play();
+
+                                $('#megaboite').on('click', function () {
+                                    //SI Y'A PAS LE SON EN TRAIN DE JOUER là le "TING"
+                                    if(audio2.paused && audio1.paused && audio3.paused) {
+                                        if (indexLoot === data.images.length) {
+                                            return;
+                                        }
+                                        // setTimeout(function () {
+                                        $("#loot" + indexLoot).attr('src', data.images[indexLoot]).attr('data-original-title', data.names[indexLoot]).fadeIn(1000);
+                                        if(indexLoot > 2){
+                                            audio3.play();
+                                        } else {
+                                            audio2.play();
+                                        }
+
+                                        indexLoot++;
+                                        console.log("indexlootapres : " + indexLoot)
+                                        // }, (indexLoot) * 1000);
+                                    }
+
+                                });
+
                         });
                     } else{
                         $('#messagepackopening').fadeIn(500);

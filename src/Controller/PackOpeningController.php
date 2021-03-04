@@ -104,6 +104,7 @@ class  PackOpeningController extends AbstractController
             }
             $obj->images = $images;
             $obj->names = $imgNames;
+            $obj->currentCouronnes = $user->getCouronnes();
 
 
         }
