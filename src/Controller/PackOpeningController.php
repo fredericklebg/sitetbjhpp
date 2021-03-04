@@ -65,13 +65,13 @@ class  PackOpeningController extends AbstractController
 
         /** @var User $user */
         $user = $this->getUser();
-//
-//        if($user->getCouronnes() < 200){
-//            $this->addFlash("error", "Tu crois que le pack est gratuit clochard ???" .
-//                " Eh ouai c trop jvais péter un cable");
-//            return $this->redirectToRoute('pack_opening');
-//        }
-        $user->setCouronnes(5000);
+
+        if($user->getCouronnes() < 200){
+            $this->addFlash("error", "Tu crois que le pack est gratuit clochard ???
+                Eh ouai c trop jvais péter un cable");
+            return $this->redirectToRoute('pack_opening');
+        }
+        $user->setCouronnes(2000);
 
         //Récupère les données d'ajax depuis index dans le Template de packopening
         $produits = $request->get('produit');
