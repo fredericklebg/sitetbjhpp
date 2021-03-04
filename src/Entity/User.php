@@ -177,7 +177,6 @@ class User implements UserInterface
     public function setCouronnes(float $couronnes) : self
     {
         $this->couronnes = $couronnes;
-        echo $this->couronnes;
         return $this;
     }
 
