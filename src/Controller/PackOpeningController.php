@@ -71,7 +71,7 @@ class  PackOpeningController extends AbstractController
                 Eh ouai c trop jvais péter un cable");
             return $this->redirectToRoute('pack_opening');
         }
-        $user->setCouronnes(2000);
+        $user->setCouronnes($user->getCouronnes() - 200);
 
         //Récupère les données d'ajax depuis index dans le Template de packopening
         $produits = $request->get('produit');

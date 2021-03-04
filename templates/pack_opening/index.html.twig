@@ -34,30 +34,43 @@
         .loot{
             position:fixed;
             top:20%;
-            left:40%
+            left:35%;
+
         }
 
         .loot img{
             display:none;
+            width: 4vw;
+            height: 4vw;
+        }
+
+        #messagepackopening{
+            font-size: 50px;
+            display:none;
+            background-color:magenta;
+        }
+
+        #messagepackopening p{
+            color: #916319;
         }
 
     </style>
 
-{#    TODO ANIMATION DE MERDE PROGRESS BAR LA LE TRUC LA MAIS SI CE MEC LA....<div class="progress">#}
-{#        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#    </div>#}
-{#    <div class="progress">#}
-{#        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#    </div>#}
-{#    <div class="progress">#}
-{#        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#    </div>#}
-{#    <div class="progress">#}
-{#        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#    </div>#}
-{#    <div class="progress">#}
-{#        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>#}
-{#    </div>#}
+    {#    TODO ANIMATION DE MERDE PROGRESS BAR LA LE TRUC LA MAIS SI CE MEC LA....<div class="progress">#}
+    {#        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>#}
+    {#    </div>#}
+    {#    <div class="progress">#}
+    {#        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>#}
+    {#    </div>#}
+    {#    <div class="progress">#}
+    {#        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>#}
+    {#    </div>#}
+    {#    <div class="progress">#}
+    {#        <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>#}
+    {#    </div>#}
+    {#    <div class="progress">#}
+    {#        <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>#}
+    {#    </div>#}
     <div class="loot">
         <img id="loot0" class="img-fluid m-3" style="height: 50%"
              data-toggle="tooltip" data-placement="top">
@@ -75,50 +88,59 @@
         <img draggable="false" id="megaboite" src="{{ asset('img/megaboite.png') }}" alt="megaboite">
     </div>
 
+    <div class="card" id="messagepackopening">
+        <p>Tu crois que le pack est gratuit clochard ??? Eh ouai c trop jvais péter un cable T___T</p>
+    </div>
+
 
     <script type=text/javascript>
         (function() {
             'use strict';
             $(() => {
-                    let tId = 0;
-                    var produitTab;
-                    produitTab = '{{ ids|json_encode}}';
-                    let ids = produitTab.slice(1,produitTab.length).split(',');
-                    // for(let i = 0 ; i<produitTab.length ; i++){
-                    //     tabIds.push(produitTab[i].id)
-                    // }
-                if('{{ app.user.couronnes }}')
-                    $('#megaboite').on('mousedown', function() {
-                        tId = setTimeout(gigopening, 2000);
-                    }).on('mouseup mouseleave', function() {
-                        clearTimeout(tId);
-                    });
+                let tId = 0;
+                var produitTab;
+                produitTab = '{{ ids|json_encode}}';
+                let ids = produitTab.slice(1,produitTab.length).split(',');
+                // for(let i = 0 ; i<produitTab.length ; i++){
+                //     tabIds.push(produitTab[i].id)
+                // }
+                $('#megaboite').on('mousedown', function () {
+                    tId = setTimeout(gigopening, 2000);
+                }).on('mouseup mouseleave', function () {
+                    clearTimeout(tId);
+                });
 
-                    function gigopening() {
+                function gigopening() {
+                    if('{{ app.user.couronnes }}' >= 200) {
+
+
                         $(".loot img").hide();
                         let produitsLoot = Array();
-                        for(let i = 0; i < 5; i++){
-                            let randomId = Math.floor(Math.random() * Math.floor({{ids|length}}));
-                            if(! ids.includes(randomId.toString())){
+                        for (let i = 0; i < 5; i++) {
+                            let randomId = Math.floor(Math.random() * Math.floor({{ ids|length }}));
+                            if (!ids.includes(randomId.toString())) {
                                 continue;
                             }
                             produitsLoot.push(randomId);
                         }
                         //Ajax pour les pack opening
                         $.ajax({
-                            url:'/pack-opened',/*$(this).attr('action')*/
-                            method:'post',/*$(this).attr('method')*/
-                            data:{produit : produitsLoot},
-                            dataType:'JSON'
+                            url: '/pack-opened',/*$(this).attr('action')*/
+                            method: 'post',/*$(this).attr('method')*/
+                            data: {produit: produitsLoot},
+                            dataType: 'JSON'
                         }).done(function (data) {
                             console.log(data);
-                            for(let i = 0; i<data.images.length; i++){
-                                setTimeout(function (){
+                            for (let i = 0; i < data.images.length; i++) {
+                                setTimeout(function () {
                                     $("#loot" + i).attr('src', data.images[i]).attr('data-original-title', data.names[i]).fadeIn(1000);
-                                },(i)*1000);
+                                }, (i) * 1000);
                             }
                         });
+                    } else{
+                        $('#messagepackopening').fadeIn(500);
                     }
+                }
             });
         }) ();
     </script>
