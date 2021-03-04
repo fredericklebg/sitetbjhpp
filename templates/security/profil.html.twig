@@ -87,12 +87,13 @@
                     $('#description').addClass("description-animation-show").removeClass("description-animation-hide").css('right',"0");
                     $('#description').empty();
                     $('#description').append('<p>' + $(this).data('description') + '</p>');
-                    console.log("oui");
                 });
 
                 $(document).on('click','*:not( .product )',function (event) {
+                    if (! $('#description').hasClass("description-animation-show")){
+                        return;
+                    }
                     $('#description').addClass("description-animation-hide").removeClass("description-animation-show").css('right',"-20%");
-                    console.log("non");
                 });
 
             });
