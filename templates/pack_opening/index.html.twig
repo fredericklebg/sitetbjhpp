@@ -160,6 +160,7 @@
                 let tId = 0;
                 let nbCouronnes = {{ app.user.couronnes }}
                 var produitTab;
+                let isDone = true;
                 //AUDIOS
                 let audio1  = new Audio('music/get_powerpoints_01v2.ogg');
                 let audio2  = new Audio('music/get_powerpoints_02v2.ogg');
@@ -183,6 +184,10 @@
                 });
 
                 function gigopening() {
+                    if(!isDone){
+
+                        return;
+                    }
 
                     let indexLoot = 1;
                     if(nbCouronnes >= 200) {
@@ -216,6 +221,7 @@
 
                             // }
 
+                            isDone = false;
                             //AFFICHE LE PREMIER ITEM AUTOMATIQUEMENT
                             $("#loot0").attr('src', data.images[0]).attr('data-original-title', data.names[0]).fadeIn(200);
                             audio1.play();
@@ -226,6 +232,7 @@
                                     if(audio2.paused && audio1.paused && audio3.paused) {
                                         if (indexLoot === data.images.length - 1) {
                                             $('#messageclique').text('C\'est fini, soit tu relances soit tu dégages');
+                                            isDone = true;
                                         }
                                         if (indexLoot === data.images.length) {
                                             return;
