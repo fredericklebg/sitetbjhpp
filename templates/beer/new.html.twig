@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Beer{% endblock %}
+
+{% block body %}
+    <h1>Create new Beer</h1>
+
+    {{ include('beer/_form.html.twig') }}
+
+    <a href="{{ path('beer_index') }}">back to list</a>
+{% endblock %}
