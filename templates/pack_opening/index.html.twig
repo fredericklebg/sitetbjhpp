@@ -158,7 +158,7 @@
             'use strict';
             $(() => {
                 let tId = 0;
-                let nbCouronnes = {{ app.user.couronnes }}
+                let nbCouronnes = {{ app.user.couronnes }};
                 var produitTab;
                 let isDone = true;
                 //AUDIOS
@@ -188,7 +188,6 @@
 
                         return;
                     }
-
                     let indexLoot = 1;
                     if(nbCouronnes >= 200) {
                         $(".loot img").hide();

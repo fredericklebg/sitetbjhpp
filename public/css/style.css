@@ -28,6 +28,10 @@ footer p {
     padding-bottom: 350px;
 }
 
+.blue{
+    color:#b8daff !important;
+}
+
 #nomMarche{
     font-family: "Cambria", "Arial";
     font-size: 50px;
@@ -109,16 +113,15 @@ footer p {
 
 #vaillefandre:hover{
     color: #9fcdff;
-    animation-name: font-up;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
 
 }
 
+.nav-link{
+    transition: 0.5s;
+}
+
 .nav-link:hover{
-    animation-name: font-up-nav-link;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
+    transform: scale(1.1,1.1);
 }
 
 #card-marche{
@@ -140,15 +143,6 @@ footer p {
 #megaboite{
    width: 500px;
     margin-top: 10em;
-
-}
-
-@keyframes font-up-nav-link {
-    100% {font-size: 18px}
-}
-
-@keyframes font-up {
-    100% {font-size: 25px}
 
 }
 

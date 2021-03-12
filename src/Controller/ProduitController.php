@@ -10,10 +10,12 @@ use App\Repository\ProduitRepository;
 use App\Repository\UserProduitRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -75,11 +77,14 @@ class ProduitController extends AbstractController
     /**
      * @Route("/achat-produit/{id}/{marcheId}/{quantity}", name="produit_achat")
      * @param ProduitRepository $produitRepository
-     * @return RedirectResponse
+     * @return Response
      */
     public function buyProduct(ProduitRepository $produitRepository /*$quantity,*/,UserProduitRepository $userProduitRepository,
                                ManagerRegistry $manager,int $id, int $marcheId, int $quantity){
         $produit = $produitRepository->findOneBy(['id' => $id]);
+        $obj = new Stdclass();
+        $obj->success = true;
+        $obj->price = $produit->getPrix();
 
 //        echo "produit :" . $id . "\n marche : " . $marcheId;
 //        exit();
@@ -93,8 +98,11 @@ class ProduitController extends AbstractController
         $total_price = $produit->getPrix() * $quantity/*$quantity*/;
 
         if($user->getCouronnes() - $total_price < 0){
-            $this->addFlash("error", "Pas assez de cash sale clochard");
-            return $this->redirectToRoute('marche_show', ['id' => $marcheId]);
+            $obj->success = false;
+            echo json_encode($obj);
+            return new Response();
+//            $this->addFlash("error", "Pas assez de cash sale clochard");
+//            return $this->redirectToRoute('marche_show', ['id' => $marcheId]);
         }
         $userProduct = $userProduitRepository->findOneBy(['user'=>$user,'produit'=>$produit]);
 
@@ -110,16 +118,15 @@ class ProduitController extends AbstractController
         }
         $user->setCouronnes($user->getCouronnes() - $total_price);
 
-
-
         $manager->getManager()->persist($user);
         $manager->getManager()->flush();
-
+        $obj->currentCouronnes = $user->getCouronnes();
         //$user->achat($produit->getPrix()/*, $quantity*/);
-
-        return $this->redirectToRoute('marche_show', [
-            'id' => $marcheId,
-        ]);
+        echo json_encode($obj);
+        return new Response();
+//        return $this->redirectToRoute('marche_show', [
+//            'id' => $marcheId,
+//        ]);
     }
 
 }

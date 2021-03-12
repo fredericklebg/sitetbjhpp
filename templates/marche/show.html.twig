@@ -80,11 +80,6 @@
 
                         <a class="btn btn-primary cancelBuy" data-id="{{ produit.id }}">Non</a>
 
-                        {% if app.user.couronnes < produit.prix  %}
-                            <a data-id="{{ produit.id }}"
-                               class="btn btn-primary"  style="background-color:red; border-color: red">Oui</a>
-                        {% else %}
-
                             <a data-id="{{ produit.id }}"
                                class="btn btn-primary oui">Oui</a>
                             <div class="row">
@@ -97,7 +92,12 @@
                             <p style="color: #1b1e21" class="text-center align-content-center">
                                 <span style="color:skyblue" id="crowns{{ produit.id }}">{{ app.user.couronnes - produit.prix}}</span> couronnes après l'achat
                             </p>
-                        {% endif %}
+                        <div id="success-buy{{ produit.id }}" style="display:none">
+                            <p>Bien joué pour cet achat fructueux, fais-en bon usage ^^</p>
+                        </div>
+                        <div id="fail-buy{{ produit.id }}" style="display:none">
+                            <p>Pas assez de cash sale clochard</p>
+                        </div>
                     </div>
 
                 </div>
@@ -123,7 +123,7 @@
                     $('#crowns'+id).text(currentCrowns+price)
                 });
 
-                $(document).on('click','.more',function (event) {
+                $(document).on('click','.more',function () {
                     let id = $(this).data("id");
                     let nb = parseInt($('#'+id).text(),10) + 1;
                     let price = $(this).parent().data("price");
@@ -132,7 +132,7 @@
                         return;
                     }
                     $('#'+id).text(nb);
-                    $('#crowns'+id).text(currentCrowns-price)
+                    $('#crowns'+id).text(currentCrowns-price);
                 });
 
 
@@ -141,7 +141,30 @@
                     let marcheId = $('#info').data("marcheid");
                     let produitId = $(this).data("id");
                     let nb = parseInt($('#'+produitId).text(),10);
-                    window.location.href = '/achat-produit/'+produitId+'/'+marcheId+'/'+nb;
+                    let id = $(this).data("id");
+                    let price = $(this).parent().data("price");
+                    $.ajax({
+                        url: '/achat-produit/'+produitId+'/'+marcheId+'/'+nb,/*$(this).attr('action')*/
+                        method: 'get',/*$(this).attr('method')*/
+                        dataType: 'JSON'
+                    }).done(function (data) {
+                        console.log(data);
+                        if(data.success === true) {
+                            $('#nbCouronnes').text(data.currentCouronnes);
+                            $('#crowns'+id).text(data.currentCouronnes - data.price);
+                            //compteur quantité achat
+                            $('#'+id).text(1);
+
+                            $('#fail-buy' + produitId).fadeOut(500);
+                            $('#success-buy' + produitId).fadeOut(500);
+                            $('#success-buy' + produitId).fadeIn(500);
+                        } else {
+                            $('#success-buy' + produitId).fadeOut(500);
+                            $('#fail-buy' + produitId).fadeOut(500);
+                            $('#fail-buy' + produitId).fadeIn(500);
+                        }
+                    });
+                    // window.location.href = '/achat-produit/'+produitId+'/'+marcheId+'/'+nb;
                 });
 
                 $(document).on('click','.buyProduct',function (event) {
