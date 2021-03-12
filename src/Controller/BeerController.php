@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Beer;
+use App\Entity\Rank;
 use App\Form\BeerType;
 use App\Repository\BeerRepository;
+use App\Repository\RankRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +20,22 @@ class BeerController extends AbstractController
     /**
      * @Route("/", name="beer_index", methods={"GET"})
      */
-    public function index(BeerRepository $beerRepository): Response
+    public function index(BeerRepository $beerRepository,RankRepository $rankRepository): Response
     {
+
+        $ranks = $rankRepository->findAll();
+        $rankBeers =array();
+
+//        $beers = $rank->getBeers();
+        foreach ($ranks as $rank){
+            $rankBeers[$rank->getName()] = $rank;
+        }
+//        echo ($rankBeers['S'][2]->getName());
+
+
         return $this->render('beer/index.html.twig', [
-            'beers' => $beerRepository->findAll(),
+            'rankBeers' => $rankBeers,
+            'ranks' => $rankRepository->findAll(),
         ]);
     }
 

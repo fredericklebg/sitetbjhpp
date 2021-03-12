@@ -19,22 +19,22 @@ class RankRepository extends ServiceEntityRepository
         parent::__construct($registry, Rank::class);
     }
 
-    // /**
-    //  * @return Rank[] Returns an array of Rank objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Rank[] Returns an array of Rank objects
+      */
+
+    public function findByRank($rank)
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
+            ->andWhere('r.name = :name')
+            ->setParameter('name', $rank)
+            ->orderBy('r.name', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Rank
