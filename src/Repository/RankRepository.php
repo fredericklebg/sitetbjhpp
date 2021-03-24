@@ -9,7 +9,6 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @method Rank|null find($id, $lockMode = null, $lockVersion = null)
  * @method Rank|null findOneBy(array $criteria, array $orderBy = null)
- * @method Rank[]    findAll()
  * @method Rank[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class RankRepository extends ServiceEntityRepository
@@ -23,13 +22,10 @@ class RankRepository extends ServiceEntityRepository
       * @return Rank[] Returns an array of Rank objects
       */
 
-    public function findByRank($rank)
+    public function findAll()
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.name = :name')
-            ->setParameter('name', $rank)
             ->orderBy('r.name', 'DESC')
-            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
