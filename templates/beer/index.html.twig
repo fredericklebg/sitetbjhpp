@@ -28,11 +28,11 @@
 
         {% if beers.beers[0] is defined %}
             <div class="row">
-                <a style="margin-left: -7em" aria-controls="rank{{ rank }}" aria-expanded="false" data-toggle="collapse" href="#rank{{ rank }}" class="mt-2 col-1 btn btn-secondary btn-circle btn-sm"> + </a>
+                <a style="margin-left: -7em" aria-controls="rank{{ beers.beers[0].tier.id }}" aria-expanded="false" data-toggle="collapse" href="#rank{{ beers.beers[0].tier.id }}" class="mt-2 col-1 btn btn-secondary btn-circle btn-sm"> + </a>
                 <h1 class="col-1" style="color :{{ beers.beers[0].tier.color }}"> {{ rank }} </h1>
             </div>
 
-            <div class="collapse show" id="rank{{ rank }}">
+            <div class="collapse show" id="rank{{ beers.beers[0].tier.id }}">
                 {% for beer in beers.beers %}
                     <div class="">
                         <h3> {{ beer.name }}</h3>
