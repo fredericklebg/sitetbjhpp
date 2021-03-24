@@ -25,7 +25,7 @@ class RankRepository extends ServiceEntityRepository
     public function findAll()
     {
         return $this->createQueryBuilder('r')
-            ->orderBy('r.bonnitude', 'DESC')
+            ->orderBy('r.bonnitude', 'ASC')
             ->getQuery()
             ->getResult()
         ;
