@@ -3,50 +3,47 @@
 {% block title %}Beer index{% endblock %}
 
 {% block body %}
+    <style>
+        .btn-circle.btn-sm {
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            text-align: center;
+            padding-left: -100px;
+        }
+    </style>
     <h1>Beer index</h1>
+    <div class="row">
+        <div class="col-2">
+            <a class="btn btn-primary" href="{{ path('beer_new') }}">Ajouter une bière</a>
+        </div>
+       <div class="col-2">
+           <a class="btn btn-primary" href="{{ path('rank_new') }}">Ajouter un tier</a>
+       </div>
+    </div>
+
 
 
     {% for rank,beers in rankBeers %}
 
         {% if beers.beers[0] is defined %}
-            <h1 style="color :{{ beers.beers[0].tier.color }}"> {{ rank }}    </h1>
-            {% for beer in beers.beers %}
+            <div class="row">
+                <a style="margin-left: -7em" aria-controls="rank{{ rank }}" aria-expanded="false" data-toggle="collapse" href="#rank{{ rank }}" class="mt-2 col-1 btn btn-secondary btn-circle btn-sm"> + </a>
+                <h1 class="col-1" style="color :{{ beers.beers[0].tier.color }}"> {{ rank }} </h1>
+            </div>
 
-                {#            {{ dump(beer)}}#}
-                <p> {{ beer.name }}</p>
-
-            {% endfor %}
-            {#        {{ dump(beer) }}#}
+            <div class="collapse show" id="rank{{ rank }}">
+                {% for beer in beers.beers %}
+                    <div class="">
+                        <h3> {{ beer.name }}</h3>
+                        <p>{{ beer.description }}</p>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
 
         {% endif %}
     {% endfor %}
-    {#    <table class="table">#}
-    {#        <thead>#}
-    {#            <tr>#}
-    {#                <th>Id</th>#}
-    {#                <th>Name</th>#}
-    {#                <th>Description</th>#}
-    {#                <th>actions</th>#}
-    {#            </tr>#}
-    {#        </thead>#}
-    {#        <tbody>#}
-    {#        {% for beer in beers %}#}
-    {#            <tr>#}
-    {#                <td>{{ beer.id }}</td>#}
-    {#                <td>{{ beer.name }}</td>#}
-    {#                <td>{{ beer.description }}</td>#}
-    {#                <td>#}
-    {#                    <a href="{{ path('beer_show', {'id': beer.id}) }}">show</a>#}
-    {#                    <a href="{{ path('beer_edit', {'id': beer.id}) }}">edit</a>#}
-    {#                </td>#}
-    {#            </tr>#}
-    {#        {% else %}#}
-    {#            <tr>#}
-    {#                <td colspan="4">no records found</td>#}
-    {#            </tr>#}
-    {#        {% endfor %}#}
-    {#        </tbody>#}
-    {#    </table>#}
 
-    <a href="{{ path('beer_new') }}">Create new</a>
+
 {% endblock %}
