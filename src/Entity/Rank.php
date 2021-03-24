@@ -34,6 +34,11 @@ class Rank
      */
     private $beers;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $bonnitude;
+
     public function __construct()
     {
         $this->beers = new ArrayCollection();
@@ -102,5 +107,17 @@ class Rank
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getBonnitude(): ?int
+    {
+        return $this->bonnitude;
+    }
+
+    public function setBonnitude(int $bonnitude): self
+    {
+        $this->bonnitude = $bonnitude;
+
+        return $this;
     }
 }
