@@ -15,6 +15,7 @@ class RankType extends AbstractType
         $builder
             ->add('name')
             ->add('color',ColorType::class)
+            ->add('bonnitude')
         ;
     }
 
