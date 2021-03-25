@@ -117,12 +117,18 @@ class User implements UserInterface
     public function __construct()
     {
         $this->userproduit = new ArrayCollection();
+        $this->contrats = new ArrayCollection();
     }
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserProduit", mappedBy="user", cascade={"persist"})
      */
     private $userproduit;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Contrat", mappedBy="User")
+     */
+    private $contrats;
 
     /**
      * @return ArrayCollection
@@ -184,6 +190,34 @@ class User implements UserInterface
 
         return $this->getCouronnes();
     }*/
+
+    /**
+     * @return Collection|Contrat[]
+     */
+    public function getContrats(): Collection
+    {
+        return $this->contrats;
+    }
+
+    public function addContrat(Contrat $contrat): self
+    {
+        if (!$this->contrats->contains($contrat)) {
+            $this->contrats[] = $contrat;
+            $contrat->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContrat(Contrat $contrat): self
+    {
+        if ($this->contrats->contains($contrat)) {
+            $this->contrats->removeElement($contrat);
+            $contrat->removeUser($this);
+        }
+
+        return $this;
+    }
 
 
 }
