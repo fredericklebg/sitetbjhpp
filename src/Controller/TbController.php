@@ -24,4 +24,11 @@ class TbController extends AbstractController
 
         return $this->render('tb/about.html.twig');
     }
+
+    /**
+     * @Route("/brolstar", name="brolstar")
+     */
+    public function brolstar(){
+        return $this->render('tb/brolstar.html.twig');
+    }
 }
