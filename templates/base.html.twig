@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Titre{% endblock %}</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
-        <!-- Bootstrap core CSS -->
-        <link href="{{ asset('css/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-        <script type="text/javascript" src="{{asset('css/bootstrap/js/bootstrap.js')}}"></script>
-        <script>
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-        </script>
-        <script>
-            (function() {
-                'use strict';
-                $(() => {
-                    if(document.URL.includes('login')){
-                        return 0;
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Titre{% endblock %}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('css/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{asset('css/bootstrap/js/bootstrap.js')}}"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        (function() {
+            'use strict';
+            $(() => {
+                if(document.URL.includes('login')){
+                    return 0;
+                }
+                let random = Math.random() * 100;
+                if(random < 15){
+                    $('#cookiemodal').modal('show');
+                }
+                $(document).on('click','#okdegage',function (event) {
+                    let random2 = Math.random() * 100;
+                    if(random2 < 20) {
+                        setTimeout(() => {
+                            $('#cookiemodal').modal('show');
+                        }, 500);
                     }
-                    let random = Math.random() * 100;
-                    if(random < 15){
-                        $('#cookiemodal').modal('show');
-                    }
-                    $(document).on('click','#okdegage',function (event) {
-                        let random2 = Math.random() * 100;
-                        if(random2 < 20) {
-                            setTimeout(() => {
-                                $('#cookiemodal').modal('show');
-                            }, 500);
-                        }
-                    });
                 });
-            }) ();
-        </script>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:steelblue; position: sticky; top: 0; z-index:2">
-            <a id="vaillefandre" class="navbar-brand" href="/">Vaillefandre</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link aggroOn" href="{{ path('tb') }}">Accueil <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('about') }}">About <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link aggroOn" href="{{ path('marais') }}">Marais <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link aggroOn" href="{{ path('marche') }}">Marché <span class="sr-only">(current)</span></a>
-                    </li>
-                    {% if app.user %}
-                        <li>
-                            <a class="nav-link blue" href="{{ path('energie') }}"> Puiser</a>
-                        </li>
-                        <li>
-                            <a class="nav-link blue" href="{{ path('contrat_index') }}">Contrats</a>
-                        </li>
-                        <li>
-                            <a class="nav-link blue" href="{{ path('user_profile') }}"> Profil</a>
-                        </li>
-                        <li>
-                            <a class="nav-link aggroOn blue" href="{{ path('pack_opening') }}"> Pack Opening</a>
-                        </li>
+            });
+        }) ();
+    </script>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:steelblue; position: sticky; top: 0; z-index:2">
+    <a id="vaillefandre" class="navbar-brand" href="/">Vaillefandre</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link aggroOn" href="{{ path('tb') }}">Accueil <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('about') }}">About <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link aggroOn" href="{{ path('marais') }}">Marais <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link aggroOn" href="{{ path('marche') }}">Marché <span class="sr-only">(current)</span></a>
+            </li>
+            {% if app.user %}
+                <li>
+                    <a class="nav-link blue" href="{{ path('energie') }}"> Puiser</a>
+                </li>
+                <li>
+                    <a class="nav-link blue" href="{{ path('contrat_index') }}">Contrats</a>
+                </li>
+                <li>
+                    <a class="nav-link blue" href="{{ path('user_profile') }}"> Profil</a>
+                </li>
+                <li>
+                    <a class="nav-link aggroOn blue" href="{{ path('pack_opening') }}"> Pack Opening</a>
+                </li>
 
                 {%  if is_granted('IS_AUTHENTICATED_FULLY')  %}
 
@@ -103,66 +103,67 @@
     </div>
 </nav>
 
-        <div id="richard">
-        <a  class="btn-danger" href="http://richard-ostrowski.eu/web/cours/coursCSS.html">Site du collègue richard allez donner de la force les san </a><br>
-        <a  class="btn-danger" href="https://github.com/capdigital/manytomanyattribute">github du collègue richard2 aka sauveur du site</a>
-        </div>
+<div id="richard">
+    <a  class="btn-danger" href="http://richard-ostrowski.eu/web/cours/coursCSS.html">Site du collègue richard allez donner de la force les san </a><br>
+    <a  class="btn-danger" href="https://github.com/capdigital/manytomanyattribute">github du collègue richard2 aka sauveur du site</a>
+    <a  class="btn-danger" href="https://sergegamingb.eu/space-invader/">Petit space invader du collègue alexandre allez vous amuser</a>
+</div>
 
-        <div class="modal fade" id="cookiemodal" tabindex="-1" role="dialog" aria-labelledby="cookieChiant1" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="cookieChiant1">Eh salut a tous on se retrouve pour une vidéo de call of duty</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        ACCEPTE LES COOKIE C'est important pour l'énergie vitale du site et le sticky footer
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="okdegage" class="btn btn-secondary" data-dismiss="modal">OK dégage</button>
+<div class="modal fade" id="cookiemodal" tabindex="-1" role="dialog" aria-labelledby="cookieChiant1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cookieChiant1">Eh salut a tous on se retrouve pour une vidéo de call of duty</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ACCEPTE LES COOKIE C'est important pour l'énergie vitale du site et le sticky footer
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="okdegage" class="btn btn-secondary" data-dismiss="modal">OK dégage</button>
 
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
+</div>
 
-        {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-        {% endfor %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 
-        {% for message in app.flashes('error') %}
-            <div class="alert alert-danger">
-                {{ message }}
-            </div>
-        {% endfor %}
+{% for message in app.flashes('error') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
 
-        <div class="container bottom-padding">
-            {% block body %}{% endblock %}
-        </div>
+<div class="container bottom-padding">
+    {% block body %}{% endblock %}
+</div>
 
-        <footer class="text-center" style="background-color:steelblue ;font-size: 15px">
+<footer class="text-center" style="background-color:steelblue ;font-size: 15px">
 
-            <p>Marché de postegrechine <br> Tous droits pas réservés hihi ^^</p>
-        </footer>
+    <p>Marché de postegrechine <br> Tous droits pas réservés hihi ^^</p>
+</footer>
 
-    {% if app.user %}
-        {% block javascripts %}
-            <script type="text/javascript">
-                $(document).on('click', '.aggroOn', function (e) {
-                    let a = Math.random() * 100;
-                    if(a <= 5) {
-                        e.preventDefault();
-                        window.location.href = '/aggro';
-                    }
-                    })
-            </script>
-        {% endblock %}
-    {% endif %}
-    </body>
+{% if app.user %}
+    {% block javascripts %}
+        <script type="text/javascript">
+            $(document).on('click', '.aggroOn', function (e) {
+                let a = Math.random() * 100;
+                if(a <= 5) {
+                    e.preventDefault();
+                    window.location.href = '/aggro';
+                }
+            })
+        </script>
+    {% endblock %}
+{% endif %}
+</body>
 
 
 

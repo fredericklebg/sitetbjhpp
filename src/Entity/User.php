@@ -131,6 +131,12 @@ class User implements UserInterface
     private $contrats;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $boutade_date;
+
+
+    /**
      * @return ArrayCollection
      */
     public function getUserproduit(): ArrayCollection
@@ -218,6 +224,20 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getBoutadeDate(): ?string
+    {
+        return $this->boutade_date;
+    }
+
+    public function setBoutadeDate(?string $boutade_date): self
+    {
+        $this->boutade_date = $boutade_date;
+
+        return $this;
+    }
+
+
 
 
 }
